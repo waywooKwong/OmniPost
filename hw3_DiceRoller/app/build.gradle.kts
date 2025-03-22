@@ -5,13 +5,13 @@ plugins {
 }
 
 android {
-    namespace = "com.liqun.aigc_adgraph_front"
-    compileSdk = 34
+    namespace = "com.liqun.hw3_diceroller"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.liqun.aigc_adgraph_front"
+        applicationId = "com.liqun.hw3_diceroller"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -37,9 +37,6 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
 }
 
 dependencies {
@@ -52,10 +49,6 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation("androidx.compose.foundation:foundation:1.6.0")
-    implementation("androidx.compose.foundation:foundation-layout:1.6.0")
-    implementation("androidx.compose.material:material:1.6.0")
-    implementation("androidx.compose.animation:animation:1.6.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

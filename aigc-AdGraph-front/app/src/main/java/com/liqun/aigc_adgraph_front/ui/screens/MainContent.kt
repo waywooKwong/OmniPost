@@ -1,5 +1,6 @@
 package com.liqun.aigc_adgraph_front.ui.screens
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.*
 import androidx.compose.animation.fadeIn
@@ -15,7 +16,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
-
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Info
@@ -43,24 +43,6 @@ fun MainContent(
     onPreview: () -> Unit
 ) {
     var isProcessing by remember { mutableStateOf(false) }
-    var currentParagraphIndex by remember { mutableStateOf(0) }
-    var isPaused by remember { mutableStateOf(false) }
-    var showPreview by remember { mutableStateOf(false) }
-    var showProgress by remember { mutableStateOf(false) }
-    
-    // 添加自动轮换效果
-    LaunchedEffect(isProcessing, isPaused) {
-        while (isProcessing && !isPaused && currentParagraphIndex < NovelData.paragraphs.size) {
-            delay(2000) // 每2秒切换一次段落
-            if (!isPaused) {
-                currentParagraphIndex = (currentParagraphIndex + 1) % NovelData.paragraphs.size
-            }
-        }
-    }
-    
-    // 存储生成的图片
-    var generatedImages by remember { mutableStateOf(List(NovelData.paragraphs.size) { "" }) }
-    var selectedParagraphIndex by remember { mutableStateOf(-1) }
     
     Box(modifier = modifier.fillMaxSize()) {
         if (!isProcessing) {
@@ -70,153 +52,10 @@ fun MainContent(
                 onUpload = { isProcessing = true }
             )
         } else {
-            // 小说处理界面
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp)
-            ) {
-                // 进度指示器
-                LinearProgressIndicator(
-                    progress = { currentParagraphIndex.toFloat() / NovelData.paragraphs.size },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    color = MaterialTheme.colorScheme.primary,
-                    trackColor = MaterialTheme.colorScheme.surfaceVariant
-                )
-                
-                // 状态信息
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        "处理中: ${currentParagraphIndex + 1}/${NovelData.paragraphs.size}",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-                
-                // 显示段落列表
-                val listState = rememberLazyListState()
-                
-                LazyColumn(
-                    state = listState,
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth()
-                ) {
-                    items(NovelData.paragraphs) { paragraph ->
-                        val isCurrentParagraph = NovelData.paragraphs.indexOf(paragraph) == currentParagraphIndex
-                        val isSelected = NovelData.paragraphs.indexOf(paragraph) == selectedParagraphIndex
-                        val paragraphIndex = NovelData.paragraphs.indexOf(paragraph)
-                        
-                        ParagraphCard(
-                            text = paragraph,
-                            isActive = isCurrentParagraph,
-                            isSelected = isSelected,
-                            onClick = {
-                                if (!isCurrentParagraph) {
-                                    selectedParagraphIndex = paragraphIndex
-                                    showProgress = true
-                                }
-                            },
-                            modifier = Modifier.padding(vertical = 6.dp)
-                        )
-                    }
-                }
-                
-                // 活动段落预览 - 根据处理状态显示
-                if (isProcessing && currentParagraphIndex < NovelData.paragraphs.size) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 8.dp)
-                    ) {
-                        // 显示当前段落的预览 - 无论是否暂停都显示
-                        ActiveParagraphPreview(
-                            index = currentParagraphIndex,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(180.dp)
-                        )
-                        
-                        Spacer(modifier = Modifier.height(16.dp))
-                        
-                        // 底部控制按钮区域 - 始终显示
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceEvenly
-                        ) {
-                            // 暂停/继续按钮
-                            Button(
-                                onClick = { isPaused = !isPaused },
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = MaterialTheme.colorScheme.secondary
-                                )
-                            ) {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Icon(
-                                        imageVector = if (isPaused) Icons.Rounded.PlayArrow else Icons.Rounded.Close,
-                                        contentDescription = if (isPaused) "继续" else "暂停"
-                                    )
-                                    Spacer(modifier = Modifier.width(8.dp))
-                                    Text(if (isPaused) "继续" else "暂停")
-                                }
-                            }
-                            
-                            // 结束按钮
-                            Button(
-                                onClick = onPreview,
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = MaterialTheme.colorScheme.primary
-                                )
-                            ) {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Icon(
-                                        imageVector = Icons.Filled.Close,
-                                        contentDescription = "完成"
-                                    )
-                                    Spacer(modifier = Modifier.width(8.dp))
-                                    Text("结束")
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            
-            // 生成进度弹窗 - 只对未完成的段落显示
-            if (showProgress) {
-                // 判断是否已经生成过
-                val hasGeneratedImage = selectedParagraphIndex <= currentParagraphIndex
-                
-                if (hasGeneratedImage) {
-                    // 已生成的段落直接显示预览图
-                    ImagePreviewDialog(
-                        paragraphIndex = selectedParagraphIndex,
-                        onDismiss = { showProgress = false }
-                    )
-                } else {
-                    // 未生成的段落显示生成进度
-                    FullScreenProgress(onComplete = {
-                        showProgress = false
-                        showPreview = true
-                    })
-                }
-            }
-            
-            // 图片预览对话框
-            if (showPreview) {
-                ImagePreviewDialog(
-                    paragraphIndex = selectedParagraphIndex,
-                    onDismiss = { showPreview = false }
-                )
-            }
+            // 显示处理界面
+            ProcessingSection(
+                onPreview = onPreview
+            )
         }
     }
 }
@@ -325,6 +164,144 @@ private fun WelcomeSection(
     }
 }
 
+// 创建CompositionLocal用于传递isPaused状态
+private val LocalIsPausedState = compositionLocalOf { false }
+
+@Composable
+private fun ProcessingSection(
+    onPreview: () -> Unit
+) {
+    var currentParagraphIndex by remember { mutableStateOf(0) }
+    var isPaused by remember { mutableStateOf(false) }
+    var showPreview by remember { mutableStateOf(false) }
+    var selectedParagraphIndex by remember { mutableStateOf(-1) }
+    
+    // 添加自动轮换效果，仅在非暂停状态下活动
+    LaunchedEffect(isPaused) {
+        while (!isPaused && currentParagraphIndex < NovelData.paragraphs.size) {
+            delay(2000) // 每2秒切换一次段落
+            if (!isPaused) {
+                currentParagraphIndex = (currentParagraphIndex + 1) % NovelData.paragraphs.size
+            }
+        }
+    }
+    
+    // 监听暂停状态变化
+    LaunchedEffect(isPaused) {
+        // TODO: 调用后端API暂停/继续生成
+        Log.d("MainContent", "暂停状态变化: $isPaused")
+    }
+    
+    // 提供isPaused状态给子组件
+    CompositionLocalProvider(LocalIsPausedState provides isPaused) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            // 进度指示器
+            LinearProgressIndicator(
+                progress = { currentParagraphIndex.toFloat() / NovelData.paragraphs.size },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                color = MaterialTheme.colorScheme.primary,
+                trackColor = MaterialTheme.colorScheme.surfaceVariant
+            )
+            
+            // 状态信息
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = if (isPaused) "已暂停: ${currentParagraphIndex + 1}/${NovelData.paragraphs.size}" 
+                          else "处理中: ${currentParagraphIndex + 1}/${NovelData.paragraphs.size}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            
+            // 显示段落列表
+            val listState = rememberLazyListState()
+            
+            LazyColumn(
+                state = listState,
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth()
+            ) {
+                items(NovelData.paragraphs) { paragraph ->
+                    val isCurrentParagraph = NovelData.paragraphs.indexOf(paragraph) == currentParagraphIndex
+                    val isSelected = NovelData.paragraphs.indexOf(paragraph) == selectedParagraphIndex
+                    val paragraphIndex = NovelData.paragraphs.indexOf(paragraph)
+                    
+                    ParagraphCard(
+                        text = paragraph,
+                        isActive = isCurrentParagraph,
+                        isSelected = isSelected,
+                        onClick = {
+                            selectedParagraphIndex = paragraphIndex
+                            showPreview = true
+                        },
+                        modifier = Modifier.padding(vertical = 6.dp)
+                    )
+                }
+            }
+            
+            // 活动段落预览 - 只在非暂停状态下显示
+            if (currentParagraphIndex < NovelData.paragraphs.size && !isPaused) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp)
+                ) {
+                    // 显示当前段落的预览
+                    ActiveParagraphPreview(
+                        index = currentParagraphIndex,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(180.dp)
+                    )
+                }
+            }
+            
+            // 底部按钮区域始终显示
+            Spacer(modifier = Modifier.height(16.dp))
+            
+            // 底部控制按钮区域
+            ControlButtons(
+                isPaused = isPaused,
+                onPauseChange = { isPaused = it },
+                onPreview = onPreview
+            )
+            
+            // 图片预览对话框
+            if (showPreview) {
+                // 判断是否已经生成过
+                val hasGeneratedImage = selectedParagraphIndex <= currentParagraphIndex
+                
+                if (hasGeneratedImage) {
+                    // 已生成的段落显示预览图
+                    ImagePreviewDialog(
+                        paragraphIndex = selectedParagraphIndex,
+                        onDismiss = { showPreview = false }
+                    )
+                } else {
+                    // 未生成的段落显示提示信息
+                    NotGeneratedDialog(
+                        paragraphIndex = selectedParagraphIndex,
+                        onDismiss = { showPreview = false }
+                    )
+                }
+            }
+        }
+    }
+}
+
 @Composable
 private fun ParagraphCard(
     text: String,
@@ -374,11 +351,24 @@ private fun ParagraphCard(
                         color = MaterialTheme.colorScheme.primary
                     )
                     
-                    LinearProgressIndicator(
-                        modifier = Modifier.width(100.dp),
-                        color = MaterialTheme.colorScheme.primary,
-                        trackColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
-                    )
+                    // 从ProcessingSection中获取isPaused状态
+                    val isPaused = LocalIsPausedState.current
+                    
+                    if (!isPaused) {
+                        // 只在非暂停状态显示进度条
+                        LinearProgressIndicator(
+                            modifier = Modifier.width(100.dp),
+                            color = MaterialTheme.colorScheme.primary,
+                            trackColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+                        )
+                    } else {
+                        // 暂停状态显示静态文本
+                        Text(
+                            "已暂停",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.secondary
+                        )
+                    }
                 }
             }
             
@@ -435,7 +425,8 @@ private fun ActiveParagraphPreview(
                 Text(
                     text = "正在为第 ${index + 1} 段生成配图...",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
                 )
             }
         }
@@ -443,74 +434,63 @@ private fun ActiveParagraphPreview(
 }
 
 @Composable
-private fun FullScreenProgress(
-    onComplete: () -> Unit
+private fun NotGeneratedDialog(
+    paragraphIndex: Int,
+    onDismiss: () -> Unit
 ) {
-    var progress by remember { mutableStateOf(0f) }
-    
-    LaunchedEffect(Unit) {
-        // 模拟进度更新
-        repeat(100) {
-            progress = (it + 1) / 100f
-            delay(20)
-        }
-        delay(300)
-        onComplete()
-    }
-    
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.8f)),
-        contentAlignment = Alignment.Center
-    ) {
-        Card(
-            modifier = Modifier
-                .width(300.dp)
-                .padding(16.dp),
-            shape = DialogShape,
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surface
-            )
-        ) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        shape = DialogShape,
+        title = { 
+            Text(
+                "暂未生成",
+                style = MaterialTheme.typography.titleLarge
+            ) 
+        },
+        text = {
             Column(
-                modifier = Modifier.padding(24.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    "生成图片中...",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurface
+                Icon(
+                    imageVector = Icons.Rounded.Info,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier
+                        .size(48.dp)
+                        .padding(bottom = 16.dp)
                 )
                 
-                Spacer(modifier = Modifier.height(24.dp))
-                
-                CircularProgressIndicator(
-                    progress = { progress },
-                    modifier = Modifier.size(64.dp),
-                    color = MaterialTheme.colorScheme.primary,
-                    trackColor = MaterialTheme.colorScheme.surfaceVariant
-                )
-                
-                Spacer(modifier = Modifier.height(16.dp))
-                
                 Text(
-                    "${(progress * 100).toInt()}%",
+                    text = "第 ${paragraphIndex + 1} 段的配图尚未生成",
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.primary
+                    color = MaterialTheme.colorScheme.onSurface,
+                    textAlign = TextAlign.Center
                 )
                 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(8.dp))
                 
                 Text(
-                    "请稍候，AI正在为您生成精美配图",
+                    text = "系统正在按顺序处理文档段落，请稍后再查看",
                     style = MaterialTheme.typography.bodyMedium,
-                    textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
                 )
             }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = onDismiss,
+                colors = ButtonDefaults.textButtonColors(
+                    contentColor = MaterialTheme.colorScheme.primary
+                )
+            ) {
+                Text("确定")
+            }
         }
-    }
+    )
 }
 
 @Composable
@@ -528,6 +508,7 @@ private fun ImagePreviewDialog(
             ) 
         },
         text = {
+            // 已生成图片的预览
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -561,4 +542,80 @@ private fun ImagePreviewDialog(
             }
         }
     )
+}
+
+@Composable
+private fun ControlButtons(
+    isPaused: Boolean,
+    onPauseChange: (Boolean) -> Unit,
+    onPreview: () -> Unit
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        // 暂停/继续按钮
+        Card(
+            modifier = Modifier
+                .padding(start = 16.dp)
+                .height(40.dp)
+                .clickable {
+                    onPauseChange(!isPaused)
+                    // TODO: 调用后端API暂停/继续生成
+                    Log.d("MainContent", "暂停状态: $isPaused")
+                },
+            shape = RoundedCornerShape(20.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = if (isPaused) 
+                    MaterialTheme.colorScheme.primary 
+                else 
+                    MaterialTheme.colorScheme.errorContainer
+            )
+        ) {
+            Row(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .padding(vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    if (isPaused) Icons.Rounded.PlayArrow else Icons.Rounded.Close,
+                    contentDescription = if (isPaused) "继续" else "暂停",
+                    tint = if (isPaused) 
+                        MaterialTheme.colorScheme.onPrimary 
+                    else 
+                        MaterialTheme.colorScheme.onErrorContainer,
+                    modifier = Modifier.size(24.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    if (isPaused) "继续生成" else "暂停生成",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = if (isPaused) 
+                        MaterialTheme.colorScheme.onPrimary 
+                    else 
+                        MaterialTheme.colorScheme.onErrorContainer
+                )
+            }
+        }
+        
+        // 结束按钮
+        Button(
+            onClick = onPreview,
+            modifier = Modifier.padding(end = 16.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            )
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector = Icons.Filled.Check,
+                    contentDescription = "完成"
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text("完成生成")
+            }
+        }
+    }
 }
