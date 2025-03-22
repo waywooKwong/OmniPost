@@ -16,10 +16,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url = uri("https://jitpack.io") }
     }
 }
 
-rootProject.name = "aigc-AdGraph-front"
+rootProject.name = "hw3_Dice Roller"
 include(":app")
- 
