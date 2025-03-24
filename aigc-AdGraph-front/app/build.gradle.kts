@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.liqun.aigc_adgraph_front"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.liqun.aigc_adgraph_front"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -36,6 +36,9 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
     }
 }
 
