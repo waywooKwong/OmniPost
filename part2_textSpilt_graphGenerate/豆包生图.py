@@ -4,10 +4,7 @@ import base64
 import requests
 import os
 from datetime import datetime
-"""
-{"主账号ID":2105903912,"用户名":"wp","登录密码":"","AccessKey":"AKLTNGYzZDBlN2IxZjAwNDQ1Yjk0MzUxMDRkYWQ1ZDRlOWY","SecretKey":"T1RBeFlXRmpNMkUwTlRGak5HRTRZamsxWVdVd05EVTFZbVkzWVdKbE56Zw=="}
 
-"""
 def text_to_image(ak, sk, prompt):
     # 初始化视觉服务
     visual_service = VisualService()
@@ -54,9 +51,9 @@ def text_to_image(ak, sk, prompt):
 # 使用示例
 if __name__ == '__main__':
     # 使用文档注释中的凭据
-    AK = "AKLTNGYzZDBlN2IxZjAwNDQ1Yjk0MzUxMDRkYWQ1ZDRlOWY"
+    AK = ""
     # 直接使用原始的Base64编码字符串作为SK
-    SK = "T1RBeFlXRmpNMkUwTlRGak5HRTRZamsxWVdVd05EVTFZbVkzWVdKbE56Zw=="
+    SK = ""
     
     # 构造符合要求的prompt（包含文字内容）
     PROMPT = (
