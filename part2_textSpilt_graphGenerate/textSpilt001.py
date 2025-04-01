@@ -18,8 +18,8 @@ load_dotenv()
 os_setenv()
 # 初始化客户端
 # 设置豆包生图API凭据
-AK = "AKLTNGYzZDBlN2IxZjAwNDQ1Yjk0MzUxMDRkYWQ1ZDRlOWY"
-SK = "T1RBeFlXRmpNMkUwTlRGak5HRTRZamsxWVdVd05EVTFZbVkzWVdKbE56Zw=="
+AK = ""
+SK = ""
 
 class EnhancedCharacterGenerator:
     def __init__(self, novel_path: str):
