@@ -1,0 +1,237 @@
+{
+  "scene_prompts": [
+    {
+      "prompt": "好的，这是一个根据你的场景描述生成的文生图提示词：\n\n**提示词:**\n\nWide-angle shot, scorching summer, August, bustling street scene. Asphalt shimmering with heat haze, cars weaving through traffic, crowded sidewalks with pedestrians. Intense sunlight, long shadows. Dynamic composition, sense of urgency and heat. Focus on textures: rough asphalt, gleaming metal of cars, colorful clothing of pedestrians. High contrast, vibrant colors, realistic rendering. Capture the feeling of oppressive heat and urban energy. Consider adding details like advertisements, street vendors, and architectural elements to enhance the realism.",
+      "roles": [],
+      "roles_photo": {}
+    },
+    {
+      "prompt": "以下是一个可能的文生图提示词：\n\n**关键词：** Soundscape, cacophony, summer, urban, noise, heat, vibrant, unsettling\n\n**提示词：** A hyperrealistic soundscape painting, focusing on the *feeling* of overwhelming noise. High-pitched cicada buzzing dominates, layered with jarring car horns and distant sirens. Visualize the sound as abstract waves or shimmering heat haze rising from a concrete jungle. The color palette should be hot and oppressive, using harsh yellows, blinding whites, and jarring reds. Aim for a sense of auditory overload and unease. Emphasize the intensity of the sounds through visual distortion and fragmented shapes. Think sensory overload; a visual representation of piercing, relentless noise.",
+      "roles": [],
+      "roles_photo": {}
+    },
+    {
+      "prompt": "**提示词：**\n\nMid-shot, bustling street, summer heat. Sweltering sunlight on asphalt, heat haze rising, distorting the view. Chaotic scene of rushing pedestrians, blurred motion. Harsh cicada song and car horns blend into a cacophony. Brown and grey asphalt road reflecting intense sunlight. Emphasize the oppressive heat and urban noise. Realistic, detailed, vibrant colors, capturing the feeling of a hot summer day in a busy city. Photorealistic, high resolution.",
+      "roles": [],
+      "roles_photo": {}
+    },
+    {
+      "prompt": "**提示词:**\n\nClose-up, group of young adults, roadside, dappled sunlight, under sparse trees. Smoking cigarettes, relaxed postures, waiting for traffic light. Casual clothing, urban setting, late afternoon. Moody lighting, soft focus, shallow depth of field. Intimate, slice-of-life, realistic depiction. Street photography style, cinematic, gritty texture. Captivating realism, detailed faces, subtle expressions. Emphasize the boredom and anticipation.",
+      "roles": [],
+      "roles_photo": {}
+    },
+    {
+      "prompt": "以下是一个简洁有力的文生图提示词，符合您的要求：\n\n**提示词:**\n\nClose-up of a young man, \"Arno,\" mid-twenties, surprised expression, slightly furrowed brow, eyes focused intently on a street corner. He's mid-smoke, cigarette in hand, a wisp of smoke curling upwards. Urban setting, gritty street corner, maybe a hint of graffiti in the background. Moody lighting, strong shadows, cinematic composition. Focus on capturing the emotion of sudden realization and intrigue. Photorealistic style, high detail, 8k resolution. Add a touch of mystery. (Emphasis on facial expression and focused gaze).",
+      "roles": [],
+      "roles_photo": {}
+    },
+    {
+      "prompt": "```\nMedium shot, anime style, young man \"Arno\", short hair, slightly cynical expression, casual street clothes, curious eyes, subtle smirk, lean face, normal nose, normal ears, slender neck, relaxed hands. Arno stares intently at something unseen. Beside him, a companion with a questioning gaze, looking at Arno with raised eyebrows. Modern urban background, Eastern influence. Soft, diffused lighting. Depth of field, focusing on Arno's face. Atmosphere of mystery and intrigue.\n```",
+      "roles": [
+        "阿诺"
+      ],
+      "roles_photo": {
+        "阿诺": "part2_textSpilt_graphGenerate\\character_portraits\\阿诺.jpg"
+      }
+    },
+    {
+      "prompt": "```\nClose-up, Anime young man, short hair, Arlo, street style clothes, curious eyes, slight smirk, slender face, normal nose/ears, long neck, relaxed hands, modern street background, Eastern setting. Arlo stares blankly at a street corner, silent moment, then expression of confusion. Detailed face, subtle emotion, focus on eyes and mouth. Soft lighting, slightly desaturated colors, cinematic atmosphere. Questioning gaze, pondering expression. High detail, sharp focus.\n```",
+      "roles": [
+        "阿诺"
+      ],
+      "roles_photo": {
+        "阿诺": "part2_textSpilt_graphGenerate\\character_portraits\\阿诺.jpg"
+      }
+    },
+    {
+      "prompt": "以下是一个生成的文生图提示词：\n\n**提示词：**\n\nMid shot, thoughtful scene. Young adult, slightly surprised expression, pauses, then speaks slowly. Urban street background, modern city feel, crosswalk visible. Soft, diffused lighting, creating a contemplative atmosphere. Focus on facial expression conveying understanding and empathy. Suggestion of traffic sounds, hint of city bustle. Include subtle visual cues like street signs or textured pavement. Emphasize realism and detail, capturing the nuances of the moment. Focus on natural skin tones and realistic clothing. Consider adding a slight depth of field to draw attention to the speaker. The overall mood should be pensive and slightly melancholic, reflecting the weight of the topic.",
+      "roles": [],
+      "roles_photo": {}
+    },
+    {
+      "prompt": "```\nClose-up, anime young man, \"Arno\", short hair, playful smirk, skeptical shake of head. Casual streetwear, curious eyes, raised eyebrow, lean face, normal nose/ears, long neck, relaxed hands. Questioning expression, slightly mocking. \"What if...?\", suggesting extreme scenario. Modern city background, Eastern style. Focus on facial expression and dramatic lighting. Subtle details, high quality, digital art. Hint of mischief in his eyes. No guide dog/cane visible. Emphasis on expression conveying \"what if the worst possible situation?\".\n```",
+      "roles": [
+        "阿诺"
+      ],
+      "roles_photo": {
+        "阿诺": "part2_textSpilt_graphGenerate\\character_portraits\\阿诺.jpg"
+      }
+    },
+    {
+      "prompt": "```\nMedium shot, anime style, young man \"Arno\" with short hair, a slightly cynical expression, casual street wear, curious eyes, subtly upturned mouth, lean face, average nose, normal ears, long neck, relaxed hands. Arno's companion rolls their eyes in the background, a hint of annoyance visible. \"Are you trying to be funny?\" implied. Modern urban setting, Eastern style. Focus on expressive faces and body language. Soft, diffused lighting. Vibrant colors with a touch of realism. Street details like graffiti or neon signs in the background. --ar 16:9 --style anime\n```",
+      "roles": [
+        "阿诺"
+      ],
+      "roles_photo": {
+        "阿诺": "part2_textSpilt_graphGenerate\\character_portraits\\阿诺.jpg"
+      }
+    },
+    {
+      "prompt": "**提示词:**\n\nMedium shot. Anime style. Young man \"Arno\", short hair, slightly cynical expression, casual streetwear, curious eyes, subtle smirk, lean face, normal nose & ears, long neck, relaxed hands. Companion, eyes following Arno's gaze, frozen in shock. Street corner in background: [Describe the shocking street corner scene here - be specific! Consider adding elements like: surreal architecture, unexpected creatures, impossible physics, vibrant colors, or a disturbing anomaly]. Modern eastern setting. Focus on Arno's curiosity and the companion's stunned reaction. Dynamic lighting. Vivid colors. High detail.",
+      "roles": [
+        "阿诺"
+      ],
+      "roles_photo": {
+        "阿诺": "part2_textSpilt_graphGenerate\\character_portraits\\阿诺.jpg"
+      }
+    },
+    {
+      "prompt": "```\ndistant view, street corner, blind young man, anime style, black t-shirt, black blindfold, determined (implied), slight smile, delicate features, short messy hair, holding grocery bag (vegetables), carrying peanut oil can on shoulder, oil glistening in sunlight, simple clothing, tired expression, modern urban background, oriental, subtle depth of field, soft lighting, realistic textures, detailed background, vibrant colors, hopeful atmosphere, cinematic composition.\n```",
+      "roles": [
+        "盲人少年"
+      ],
+      "roles_photo": {
+        "盲人少年": "part2_textSpilt_graphGenerate\\character_portraits\\盲人少年.jpg"
+      }
+    },
+    {
+      "prompt": "```\nAnime style, blind young man, black t-shirt, black blindfold, smiling, delicate face, carrying heavy load: left hand cheap shopping bag full of vegetables, right hand guide cane across shoulder like a pole, end of cane large bucket of glistening golden peanut oil, sunny day, distant view, slightly messy short hair, determined (implied) gaze, simple clothes, slight fatigue, modern Eastern setting, realistic lighting, vibrant colors, focus on the contrast between the boy's youth and the heavy burden.\n```",
+      "roles": [
+        "盲人少年"
+      ],
+      "roles_photo": {
+        "盲人少年": "part2_textSpilt_graphGenerate\\character_portraits\\盲人少年.jpg"
+      }
+    },
+    {
+      "prompt": "**提示词：**\n\n特写，二次元盲人少年，黑缎缠目，盲杖在肩，黑色短袖，清秀微笑，略带疲惫，坚定的眼神（虽被遮挡），现代东方背景。左手蔬菜袋，右手扛花生油，突显荒诞感。细节：略微凌乱短发，普通鼻子，正常耳朵，短脖子，朴素服饰。光线：柔和漫射光，营造疲惫感。风格：动漫风格，色彩鲜明，细节丰富，体现少年乐观精神与生活压力。",
+      "roles": [
+        "盲人少年"
+      ],
+      "roles_photo": {
+        "盲人少年": "part2_textSpilt_graphGenerate\\character_portraits\\盲人少年.jpg"
+      }
+    },
+    {
+      "prompt": "以下是一个符合要求的文生图提示词：\n\n**提示词:**\n\nMid shot, surprised onlookers, curious eyes, teenage boy (subject is ambiguous, allowing for creative interpretation), subtle fantasy element (suggesting the \"匪夷所思\" nature without explicitly defining it), busy street scene, slightly desaturated colors, shallow depth of field, bokeh effect on background figures, cinematic lighting, dramatic atmosphere, sense of wonder, hinting at the extraordinary, realistic style, detailed textures, 8k resolution, trending on Artstation.",
+      "roles": [],
+      "roles_photo": {}
+    },
+    {
+      "prompt": "好的，这是一个符合要求的文生图提示词：\n\n**提示词：**\n\nClose-up, concerned pedestrians whispering, gossiping about a strange teenager. Focus on their faces, conveying suspicion and curiosity. The teenager is slightly blurred in the background, engaged in an unusual activity (e.g., intently staring at a wall, holding a strange object, talking to himself). Urban environment, maybe a street corner or park. Dimly lit, overcast sky, creating a sense of unease and mystery. Dramatic lighting, emphasizing the expressions of the pedestrians. Cinematic quality, high detail, realistic style. Inspired by Gregory Crewdson.",
+      "roles": [],
+      "roles_photo": {}
+    },
+    {
+      "prompt": "以下是一个高质量的文生图提示词，用于AI绘图，基于您提供的场景描述：\n\n**提示词:**\n\nClose-up, street scene, several pedestrians whispering, gossiping, observing a teenage boy. Boy is walking with multiple layers of cloth completely covering his eyes. Concerned and curious expressions on the pedestrians' faces. Urban setting, slightly overcast lighting, creating a sense of mystery and intrigue. Focus on the boy's determination despite his obscured vision.  Detailed textures, realistic rendering.  Atmospheric perspective, shallow depth of field emphasizing the figures and blurring the background.  Subtle color palette with muted tones.  Emphasize the contrast between the boy's obscured vision and the sharp focus on the observers.  Possible elements: cobblestone street, vintage building facades, hint of traffic in the background.  Intricate details in clothing and facial expressions.  High resolution, cinematic quality.",
+      "roles": [],
+      "roles_photo": {}
+    },
+    {
+      "prompt": "以下是一个简洁有力的文生图提示词：\n\n**Prompt:**\n\nClose-up, anime style, young blind man. Black short-sleeved shirt, black cloth blindfold, slight smile. Delicate features, normal nose and ears, short neck. Left hand holds grocery bag with vegetables, right hand carries a bottle of peanut oil. Slightly messy short hair, determined expression (implied). Simple clothing, subtle fatigue. Modern street background, Eastern setting. A few pedestrians in the background, whispering and glancing at him with curiosity. Focus on conveying the boy's resilience and the contrasting reactions of the onlookers. Soft, diffused lighting.",
+      "roles": [
+        "盲人少年"
+      ],
+      "roles_photo": {
+        "盲人少年": "part2_textSpilt_graphGenerate\\character_portraits\\盲人少年.jpg"
+      }
+    },
+    {
+      "prompt": "**提示词:**\n\nClose-up. Anime style. Young blind man, modern setting, Asian. Black t-shirt. Black cloth blindfold, smiling. Delicate face, normal features. Short hair, slightly messy. He carries a grocery bag (vegetables) in his left hand and a bottle of cooking oil in his right. Tired expression. Several pedestrians in the background, whispering and pointing. Sunny day. Focus on the boy's confident aura despite the blindfold. Urban street, everyday setting. The scene evokes curiosity and a slight sense of wonder.",
+      "roles": [
+        "盲人少年"
+      ],
+      "roles_photo": {
+        "盲人少年": "part2_textSpilt_graphGenerate\\character_portraits\\盲人少年.jpg"
+      }
+    },
+    {
+      "prompt": "以下是一个符合要求的文生图提示词：\n\n**提示词:**\n\nClose-up, several pedestrians gossiping, whispering amongst themselves, suspicious glances. A young man, appearing blind, carrying a heavy object on his shoulder with his white cane. He is not using it for guidance. Urban street background, slightly blurred. Concerned expressions on the faces of the onlookers. Somber lighting, hinting at mystery and intrigue. Realistic style, detailed textures, cinematic composition. Focus on the expressions and body language. Subtle color palette, emphasizing the urban environment and the unusual situation. Hint of disbelief and judgment in the air. Maybe a vintage or slightly desaturated filter to enhance the mood.",
+      "roles": [],
+      "roles_photo": {}
+    },
+    {
+      "prompt": "**提示词：**\n\nClose-up, a small group of pedestrians whispering and gossiping, observing a young man's strange actions. Soft, natural lighting. Focus on their expressions: curiosity, amusement, and judgement. Blurred background to emphasize the foreground figures. Street scene, daytime. The young man is slightly out of focus in the background, adding to the mystery. Capture the atmosphere of intrigue and social commentary. \"The youth of today...\" feeling. Realistic style, detailed faces.",
+      "roles": [],
+      "roles_photo": {}
+    },
+    {
+      "prompt": "**提示词:**\n\n(masterpiece, best quality), (ultra-detailed), anime style, young blind man, black t-shirt, black blindfold over eyes, slight smile, delicate features, short messy hair, determined gaze (implied), simple clothing, tired expression, holding vegetable bag in left hand, carrying peanut oil on right shoulder, bustling city street background, curious pedestrians looking at the boy, whispering, flickering red traffic light, summer atmosphere, bright sunlight, vibrant colors, depth of field, wide-angle shot, distant view, oriental setting, modern era.",
+      "roles": [
+        "盲人少年"
+      ],
+      "roles_photo": {
+        "盲人少年": "part2_textSpilt_graphGenerate\\character_portraits\\盲人少年.jpg"
+      }
+    },
+    {
+      "prompt": "`Medium shot, anime girl in school uniform approaches a teenage boy, looking up at him with worry. Big black eyes, clear gaze, bangs, cute face, small nose, small ears, slender neck. Her hand reaches out to touch the boy. Slightly sweaty cheeks, innocent concern. Modern setting, East Asian. Focus on detailed facial expressions and emotional atmosphere. Emphasize the contrast between the girl's innocence and her worried expression. Capture the scene's emotional depth and visual clarity.`",
+      "roles": [
+        "小女孩"
+      ],
+      "roles_photo": {
+        "小女孩": "part2_textSpilt_graphGenerate\\character_portraits\\小女孩.jpg"
+      }
+    },
+    {
+      "prompt": "```\nClose-up, anime girl, school uniform, earnest expression, looking up at teenage boy. Big black eyes, worried, clear gaze, bangs, cute face, small nose, small ears, slender neck, hand outstretched, offering help. Slight sweat on cheeks, innocent smile, modern city background, Eastern setting. Detailed face, soft lighting, focus on emotion, vibrant colors. \"Let me help you cross the street, big brother?\" Implied tenderness, vulnerability, and kindness.\n```",
+      "roles": [
+        "小女孩"
+      ],
+      "roles_photo": {
+        "小女孩": "part2_textSpilt_graphGenerate\\character_portraits\\小女孩.jpg"
+      }
+    },
+    {
+      "prompt": "```\nclose-up shot, anime girl, 12-13 years old, school uniform, black eyes, worried expression, clear eyes, bangs, cute face, small nose, small ears, slender neck, slightly sweaty cheeks, pure smile, modern background, eastern, close up of face, sweat drops on cheek, worried gaze, reaching hand, holding hands with a boy (implied), beautiful detail, high resolution, masterpiece, best quality, intricate detail, vibrant colors, soft lighting, emotional, touching scene, emphasis on eyes, innocence, depth of field, bokeh background, (optionally add style influence: e.g., (style of Makoto Shinkai):1.2)\n```",
+      "roles": [
+        "小女孩"
+      ],
+      "roles_photo": {
+        "小女孩": "part2_textSpilt_graphGenerate\\character_portraits\\小女孩.jpg"
+      }
+    },
+    {
+      "prompt": "```\nClose-up, young boy, slight surprise, turning head, subtle smile.\n\nGirl: anime, school uniform, big dark eyes, worried expression, clear gaze, bangs, cute face, small nose, small ears, slender neck, holding boy's hand, slightly sweaty cheeks, innocent smile, modern background, East Asian.\n\nVisual focus: soft lighting, shallow depth of field, bokeh background (suggesting a bustling city street), focus on the boy's surprised expression and the girl's earnestness. Capture the contrast between their expressions – the boy's dawning amusement and the girl's anxiety. Emphasize the connection between their hands.\n```",
+      "roles": [
+        "小女孩"
+      ],
+      "roles_photo": {
+        "小女孩": "part2_textSpilt_graphGenerate\\character_portraits\\小女孩.jpg"
+      }
+    },
+    {
+      "prompt": "```\nClose-up shot, anime style, blind young man, black short sleeve, black blindfold, gentle smile, holding grocery bag and cooking oil, messy short hair, modern oriental setting. Opposite him, a young girl in school uniform, large black eyes, worried expression, reaching for his hand, slight sweat, innocent smile. Soft, diffused lighting. Focus on the interaction and subtle emotions. Keywords: close-up, anime, blind, boy, girl, school uniform, gentle, worried, hand-holding, groceries, soft lighting, emotional, oriental, modern.\n```",
+      "roles": [
+        "盲人少年",
+        "小女孩"
+      ],
+      "roles_photo": {
+        "盲人少年": "part2_textSpilt_graphGenerate\\character_portraits\\盲人少年.jpg",
+        "小女孩": "part2_textSpilt_graphGenerate\\character_portraits\\小女孩.jpg"
+      }
+    },
+    {
+      "prompt": "",
+      "roles": [
+        "小女孩"
+      ],
+      "roles_photo": {
+        "小女孩": "part2_textSpilt_graphGenerate\\character_portraits\\小女孩.jpg"
+      }
+    },
+    {
+      "prompt": "以下是根据您提供的场景描述生成的高质量文生图提示词：\n\n**提示词：**\n\nExtreme close-up sound wave visualization, the moment a green traffic light activates. Vivid emerald light emanating, transforming into visible sound ripples. Crisp, sharp focus on the “click” or “snap” of the light switch. Abstract representation of sound as geometric patterns and glowing particles. Background: Deep, textured black, enhancing the luminosity of the green energy. Minimalist aesthetic, emphasizing the purity of the sound and light. Dynamic composition, suggesting forward movement and energy release. Digital art, high detail, 8k resolution, octane render.",
+      "roles": [],
+      "roles_photo": {}
+    },
+    {
+      "prompt": "`Wide shot, green light shining, a young boy and girl hand-in-hand, walking towards the opposite side of the street. Anime style, young girl, school uniform, large dark eyes, worried expression, clear gaze, bangs, cute face, small nose, small ears, slender neck, hand extended to hold the boy's hand, slightly sweaty cheeks, innocent smile, modern background, East Asian. Focus on visual impact and atmosphere.`",
+      "roles": [
+        "小女孩"
+      ],
+      "roles_photo": {
+        "小女孩": "part2_textSpilt_graphGenerate\\character_portraits\\小女孩.jpg"
+      }
+    },
+    {
+      "prompt": "**提示词：**\n\nWide shot, distant view. Young boy and girl walking across the road, modern city background. Girl: anime style, school uniform, big dark eyes, worried expression, clear gaze, bangs, cute face, small nose, small ears, slender neck, holding the boy's hand, slightly sweaty cheeks, innocent smile, oriental. Boy: (描述略，可根据需求添加，例如：休闲装，阳光少年等). Focus on the road crossing, creating a sense of movement and connection between the two characters. Soft, natural lighting. Capture the emotional nuance of the girl's expression against the backdrop of the urban environment.",
+      "roles": [
+        "小女孩"
+      ],
+      "roles_photo": {
+        "小女孩": "part2_textSpilt_graphGenerate\\character_portraits\\小女孩.jpg"
+      }
+    }
+  ]
+}
