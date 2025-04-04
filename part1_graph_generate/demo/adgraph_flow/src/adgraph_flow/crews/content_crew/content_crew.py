@@ -1,5 +1,5 @@
 from crewai import Agent, Crew, Process, Task
-from crewai.project import CrewBase, agent, crew, task, before_kickoff, after_kickoff
+from crewai.project import CrewBase, agent, crew, task
 
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
@@ -7,18 +7,8 @@ from crewai.project import CrewBase, agent, crew, task, before_kickoff, after_ki
 
 
 @CrewBase
-class Adgraph:
-    """Adgraph crew"""
-
-    @before_kickoff
-    def before_kickoff_function(self, inputs):
-        print(f"Before kickoff function with inputs: {inputs}")
-        return inputs  # You can return the inputs or modify them as needed
-
-    @after_kickoff
-    def after_kickoff_function(self, result):
-        print(f"After kickoff function with result: {result}")
-        return result  # You can return the result or modify it as needed
+class ContentCrew:
+    """ContentCrew crew"""
 
     # Learn more about YAML configuration files here:
     # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
@@ -29,29 +19,30 @@ class Adgraph:
     # If you would like to add tools to your agents, you can learn more about it here:
     # https://docs.crewai.com/concepts/agents#agent-tools
     @agent
-    def researcher(self) -> Agent:
-        return Agent(config=self.agents_config["researcher"], verbose=True)
+    def content_writer(self) -> Agent:
+        return Agent(config=self.agents_config["content_writer"], verbose=True)
 
     @agent
-    def reporting_analyst(self) -> Agent:
-        return Agent(config=self.agents_config["reporting_analyst"], verbose=True)
+    def content_reviewer(self) -> Agent:
+        return Agent(config=self.agents_config["content_reviewer"], verbose=True)
 
     # To learn more about structured task outputs,
     # task dependencies, and task callbacks, check out the documentation:
     # https://docs.crewai.com/concepts/tasks#overview-of-a-task
     @task
-    def research_task(self) -> Task:
-        return Task(
-            config=self.tasks_config["research_task"],
-        )
+    def write_section_task(self) -> Task:
+        return Task(config=self.tasks_config["write_section_task"])
 
     @task
-    def reporting_task(self) -> Task:
-        return Task(config=self.tasks_config["reporting_task"], output_file="output/report.md")
+    def review_section_task(self) -> Task:
+        return Task(
+            config=self.tasks_config["review_section_task"],
+            context=[self.write_section_task()],
+        )
 
     @crew
     def crew(self) -> Crew:
-        """Creates the Adgraph crew"""
+        """Creates the ContentCrew crew"""
         # To learn how to add knowledge sources to your crew, check out the documentation:
         # https://docs.crewai.com/concepts/knowledge#what-is-knowledge
 
