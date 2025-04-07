@@ -20,6 +20,12 @@ class NovelSceneGenerator:
         if not os.path.exists(novel_path):
             raise FileNotFoundError(f"小说文件不存在: {novel_path}")
         
+          # 获取小说名称
+        self.novel_name = os.path.splitext(os.path.basename(novel_path))[0]
+        
+        # 创建小说专属目录
+        self.novel_dir = os.path.join("part2_textSpilt_graphGenerate", self.novel_name)
+
         self.novel_path = novel_path
         
         with open(novel_path, 'r', encoding='utf-8') as file:
@@ -32,8 +38,8 @@ class NovelSceneGenerator:
         self.llm = get_gemini_2_flash()
         
         # 创建存储目录
-        self.output_dir = "part2_textSpilt_graphGenerate/role_message"
-        os.makedirs(self.output_dir, exist_ok=True)
+        self.output_dir = os.path.join(self.novel_dir, "role_message")
+        
         
         # 初始化场景列表
         self.scenes = []
@@ -49,7 +55,7 @@ class NovelSceneGenerator:
               {{
                 "scenes": [
                   {{
-                    "description": "详细的画面描述",
+                    "description": "尽可能详细的画面描述",
                     "original_text": "对应的原文内容，(尽可能一个句子)"
                   }}
                 ]
