@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 忽略斗破苍穹节选文件夹
 part2_textSpilt_graphGenerate/斗破苍穹节选/
 
@@ -32,3 +33,61 @@ var/
 # 忽略操作系统生成的文件
 .DS_Store
 Thumbs.db 
+=======
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.venv/
+ENV/
+env/
+.Python
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# MyPy
+.mypy_cache/
+
+# Pyre type checker
+.pyre/
+
+# pytype
+.pytype/
+
+# PyCharm
+.idea/
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+>>>>>>> 2dfcc7301049e635909d894d4c47fd4ca108bb37
