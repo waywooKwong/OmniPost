@@ -1,0 +1,18 @@
+{
+  "001": {
+    "name": "阿诺",
+    "prompt": "a boy, young man, casual look, short hair, (average build:1.2), summer day"
+  },
+  "002": {
+    "name": "阿诺的同伴",
+    "prompt": "a boy, young man, casual style, short haircut, (clean face:1.2), summer heat"
+  },
+  "003": {
+    "name": "少年",
+    "prompt": "a boy, teenager, (blindfolded:1.2), black blindfold, young face, short hair"
+  },
+  "004": {
+    "name": "小女孩",
+    "prompt": "a girl, twelve years old, (big dark eyes:1.2), young face, dark hair, small nose"
+  }
+}

@@ -1,39 +1,6 @@
-<<<<<<< HEAD
 # 忽略斗破苍穹节选文件夹
 part2_textSpilt_graphGenerate/斗破苍穹节选/
 
-# 忽略所有临时文件和缓存
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# 忽略IDE相关文件
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# 忽略操作系统生成的文件
-.DS_Store
-Thumbs.db 
-=======
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -90,4 +57,3 @@ coverage.xml
 
 # Logs
 *.log
->>>>>>> 2dfcc7301049e635909d894d4c47fd4ca108bb37

@@ -23,7 +23,9 @@ def os_setenv():
     #gemini
     # 设置Google API密钥
     # os.environ["GOOGLE_API_KEY"] = "AIzaSyC93MxOUrGCH-VOMTM5JVW6tRvgGQy1XcE"
-    os.environ["GOOGLE_API_KEY"] = "AIzaSyAE3FuOPwdKEhYs0GlNBkCZvEczSTvJkjI"
+    # os.environ["GOOGLE_API_KEY"] = "AIzaSyArPTBPliX86XJeE5p5xHB9BbSFE__saBw"
+    os.environ["GOOGLE_API_KEY"] = "AIzaSyBulXOPSyuOUidcz9GUI52jtr7m7fxCLJ0"
+    # os.environ["GOOGLE_API_KEY"] = "AIzaSyAE3FuOPwdKEhYs0GlNBkCZvEczSTvJkjI"
 
     
 
@@ -38,7 +40,7 @@ def get_gemini_2_flash():
     # 初始化ChatGoogleGenerativeAI
     llm = ChatGoogleGenerativeAI(
         # model="gemini-2.0-flash",
-        model="gemini-2.0-flash",
+        model="gemini-2.5-flash-preview-04-17",
         temperature=0.7
     )
     return llm

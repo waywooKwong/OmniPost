@@ -1,0 +1,42 @@
+api_keys:
+  google: AIzaSyC93MxOUrGCH-VOMTM5JVW6tRvgGQy1XcE
+  zhipu: 60bbabbbfb654cfabea1ee3be31dd103.ZO16tosFmkQihzlY
+available_models:
+  - glm-4-flash
+  - gemini-2.0-flash
+  - gemini-2.5-flash-preview-04-17
+  - gemini-2.5-pro-exp-03-25
+backup_model: glm-4-flash
+default_model: gemini-2.5-flash-preview-04-17
+models:
+  gemini-2.0-flash:
+    model_class: ChatGoogleGenerativeAI
+    model_name: gemini-2.0-flash
+    package: langchain_google_genai
+    provider: google
+    temperature: 0.7
+  gemini-2.5-flash-preview-04-17:
+    model_class: ChatGoogleGenerativeAI
+    model_name: gemini-2.5-flash-preview-04-17
+    package: langchain_google_genai
+    provider: google
+    temperature: 0.7
+  gemini-2.5-pro-exp-03-25:
+    model_class: ChatGoogleGenerativeAI
+    model_name: gemini-2.5-pro-exp-03-25
+    package: langchain_google_genai
+    provider: google
+    temperature: 0.7
+  glm-4-flash:
+    model_class: ChatZhipuAI
+    model_name: glm-4-flash
+    package: langchain_community.chat_models
+    provider: zhipu
+    temperature: 0.7
+providers:
+  google:
+    api_param: google_api_key
+    env_var: GOOGLE_API_KEY
+  zhipu:
+    api_param: api_key
+    env_var: ZHIPUAI_API_KEY

@@ -1,0 +1,44 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+How to Use via API
+The following format is used when utilizing this extension via the API.
+
+  "prompt": "green hair twintail BREAK red blouse BREAK blue skirt",
+	"alwayson_scripts": {
+		"Regional Prompter": {
+			"args": [True,False,"Matrix","Vertical","Mask","Prompt","1,1,1","",False,False,False,"Attention",False,"0","0","0",""]
+}}
+Please refer to the table below for each setting in args. No. corresponds to the order. When the type is text, please enclose it with "". Modes 3-6 ignore submodes that do not correspond to the mode selected in mode 3. For the mask in 17., please specify the address of the image data. Absolute paths or relative paths from the web-ui root can be used. Please create the mask using the color specified in the mask item.
+
+No.	setting	choice	type	default
+1	Active	True, False	Bool	False
+2	debug	True, False	Bool	False
+3	Mode	Matrix, Mask, Prompt	Text	Matrix
+4	Mode (Matrix)	Horizontal, Vertical, Colums, Rows	Text	Columns
+5	Mode (Mask)	Mask	Text	Mask
+6	Mode (Prompt)	Prompt, Prompt-Ex	Text	Prompt
+7	Ratios		Text	1,1,1
+8	Base Ratios		Text	0
+9	Use Base	True, False	Bool	False
+10	Use Common	True, False	Bool	False
+11	Use Neg-Common	True, False	Bool	False
+12	Calcmode	Attention, Latent	Text	Attention
+13	Not Change AND	True, False	Bool	False
+14	LoRA Textencoder		Text	0
+15	LoRA U-Net		Text	0
+16	Threshold		Text	0
+17	Mask		Text	
+18	LoRA stop step		Text	0
+19	LoRA Hires stop step		Text	0
+20	flip	True, False	Bool	False
+Example Settings
+Matrix
+  "prompt": "green hair twintail BREAK red blouse BREAK blue skirt",
+	"alwayson_scripts": {
+		"Regional Prompter": {
+			"args": [True,False,"Matrix","Vertical","Mask","Prompt","1,1,1","",False,False,False,"Attention",False,"0","0","0",""]
+}}
+
