@@ -1,0 +1,18 @@
+{
+  "001": {
+    "name": "少年",
+    "prompt": "a boy, (:blindfolded:1.2), black blindfold, black short-sleeved shirt, young man"
+  },
+  "002": {
+    "name": "小女孩",
+    "prompt": "a girl, school uniform, (:large dark eyes:1.2), sweat drops, twelve years old"
+  },
+  "003": {
+    "name": "阿诺",
+    "prompt": "a young man, casual clothing, young adult, urban environment"
+  },
+  "004": {
+    "name": "阿诺的同伴",
+    "prompt": "a young man, casual clothing, young adult, urban environment"
+  }
+}

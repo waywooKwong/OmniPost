@@ -16,6 +16,7 @@ from typing_extensions import TypedDict, Annotated
 from langgraph.checkpoint.memory import MemorySaver
 import argparse
 from prompt_templates import SCENE_PROMPT
+import re
 
 # 状态类型定义，用于记忆
 class State(TypedDict):
@@ -92,11 +93,18 @@ def identify_characters_agent(state: State):
         response = model.invoke(prompt_request)
         roles_text = response.content.strip()
         print(f"模型返回的角色: {roles_text}")
-        
-        if roles_text == "无已知角色":
-            identified_roles = []
+        if isinstance(roles_text, str):
+            if roles_text == "无已知角色":
+                identified_roles = []
+            else:
+                identified_roles = [role.strip() for role in roles_text.split(',')]
+        elif isinstance(roles_text, list):
+            identified_roles = [role.strip() for role in roles_text]
         else:
-            identified_roles = [role.strip() for role in roles_text.split(',')]
+            print("无法解析的角色格式:", roles_text)
+            identified_roles = []
+
+        
         
         # 过滤确认角色存在于映射中
         valid_roles = [role for role in identified_roles if role in state["name_to_prompt"]]
@@ -129,38 +137,19 @@ def generate_prompt_for_scene(state: State):
     
     prompt_request = f"""
     你是一个专业的小说分析与Stable Diffusion提示词优化专家。请根据以下场景生成场景提示词（不包含人物描述）。
-
     场景信息：
     描述: {scene['description']}
-    原文: {scene['original_text']}
     
-    层次化提取，从以下参考文本中创建场景提示词：
-    场景要素参考：
-    - 构图参考：{SCENE_PROMPT["composition"]}
-    - 光线参考：{SCENE_PROMPT["lighting"]}
-    - 色调参考：{SCENE_PROMPT["tone"]}
-    - 天气参考：{SCENE_PROMPT["weather"]}
-    - 时间参考：{SCENE_PROMPT["time"]}
-    - 背景参考：{SCENE_PROMPT["background"]}
-    - 图案参考：{SCENE_PROMPT["pattern"]}
-    - 上装参考：{SCENE_PROMPT["top"]}
-    - 下装参考：{SCENE_PROMPT["bottom"]}
-    - 制服参考：{SCENE_PROMPT["uniform"]}
-    - 头部配饰参考：{SCENE_PROMPT["head_accessory"]}
-    - 眼部配饰参考：{SCENE_PROMPT["eye_accessory"]}
-    - 手部配饰参考：{SCENE_PROMPT["hand_accessory"]}
-    - 物品参考：{SCENE_PROMPT["items"]}
-    - 鞋履参考：{SCENE_PROMPT["foot_wear"]}
-    - 身体配饰参考：{SCENE_PROMPT["body_accessory"]}
-    - 姿势参考：{SCENE_PROMPT["pose"]}
-    - 人数参考：{SCENE_PROMPT["count"]}
-
-    注意：也可以生成以上参考文本中没有的元素，但是不要遗漏。比如现代化都市、高楼、古建筑
-
+    注意：分析场景,将场景场景内容使用简要的英文词组表达出来,不需要特别详细
+        - 开头必须以人数开始附带每个人的性别 比如(2 people,a girl and a boy:1.4)或者(2 girl:1.4),必须使用括号强调!!!
+        - 镜头，比如：中景、远景、特写等
+        - 背景：背景建筑/室内/家具等
+        - 之后换行(重要)
+        - 人物：必须先写出识别出的人物名称,(禁止出现人物的外貌描写),然后写该角色的穿搭，动作，表情，以及一些道具辅助。比如"张三，西装，坐在椅子上，手中拿着杯子"。写完后换行进行下一个人物。
     请按照以下JSON格式生成提示词：
     {{
         "roles": "{', '.join(identified_roles)}",
-        "prompt": "场景提示词（不包含人物外貌描述，但要包含人物的动作、服装等。15-20个词组）"
+        "prompt": "场景提示词（不包含人物外貌描述，但要包含人物的动作、服装等。5-15个词组）"
     }}
     注意：生成的角色数组必须按照 [角色1,角色2,角色3] 格式，不要添加任何其他格式。
     生成提示词要求：
@@ -168,12 +157,9 @@ def generate_prompt_for_scene(state: State):
     2. 不要添加任何markdown标记或其他格式。
     3. 不要添加任何解释或说明。
     4. 不要添加任何人物外貌描写，只需包含人物个数以及人物的服装、动作、姿态等。
-    5. 个性化调整：支持用户对特定关键词增加权重（如 (golden hair:1.2)），强调某些特征的视觉表现力,必须包含。
-        5.7. 人物互动：必须包含人物互动，人物互动必须强调（如果是多人同屏）。
-        5.8. 人数：必须包含人数，人数必须强调(权重1.5)。
-        5.9  画面风格：必须包含画面风格，画面风格必须强调。
     6. 不要太夸张的描述
     7. 不能为空
+    8. 调整关键字强度的等效方法是使用 () 和 []。 (keyword) 将tag的强度增加 1.1 倍，与 (keyword:1.1) 相同，最多可加三层。 [keyword] 将强度降低 0.9 倍，与 (keyword:0.9) 相同。
     请直接返回JSON格式的结果，不要添加任何markdown标记或其他格式。
     """
     
@@ -201,23 +187,31 @@ def generate_prompt_for_scene(state: State):
         prompt_data = json.loads(response_text)
         
         # 处理提示词
-        roles = prompt_data["roles"].split(", ") if prompt_data["roles"] else []
+        if isinstance(prompt_data["roles"], str):
+        
+            roles = [role.strip() for role in prompt_data["roles"].split(',')]
+        elif isinstance(prompt_data["roles"], list):
+            roles = [role.strip() for role in prompt_data["roles"]]
+        else:
+            print("无法解析的角色格式:", prompt_data["roles"])
+            roles = []
+       
         base_prompt = prompt_data["prompt"]
         
         # 构建最终提示词
-        final_prompt = ""
+        final_prompt = base_prompt
+
         if roles:
-            # 过滤出实际存在于name_to_prompt中的角色
+            # 过滤出实际存在于 name_to_prompt 中的角色
             valid_roles = [role for role in roles if role in state["name_to_prompt"]]
+
             if valid_roles:
-                role_prompts = [state["name_to_prompt"][role] for role in valid_roles]
-                people_desc = f"{len(role_prompts)} people({' and '.join(role_prompts)})"
-                final_prompt = f"{people_desc}\n{base_prompt}"
-            else:
-                final_prompt = base_prompt
-        else:
-            final_prompt = base_prompt
-        
+                for role in valid_roles:
+                    role_desc = state["name_to_prompt"][role]
+
+                    # 替换 base_prompt 中的角色名为其描述（确保只替换单词边界）
+                    final_prompt = re.sub(rf'\b{re.escape(role)}\b', role_desc, final_prompt)
+
         return {
             "prompt": final_prompt,
             "messages": [HumanMessage(content=prompt_request), AIMessage(content=response.content)]

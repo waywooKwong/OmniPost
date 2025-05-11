@@ -1,44 +1,99 @@
 import os
 import json
-from typing import List, Dict
+from typing import List, Dict, Optional
+from fastapi import FastAPI, HTTPException, UploadFile, File, Form
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
-from Models import os_setenv, get_gemini_2_5_flash ,get_gemini_2_flash
+
+from LLM_Choose import get_default_llm, get_backup_llm, init_environment
 from dotenv import load_dotenv
 import time
 from prompt_templates import HUMAN_PROMPTS
+import hashlib
+import datetime
 load_dotenv()
-os_setenv()
+
+
+app = FastAPI(title="小说角色提取API", description="用于提取小说中的角色并生成角色画像提示词")
+
+# 配置CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 允许所有来源
+    allow_credentials=True,
+    allow_methods=["*"],  # 允许所有方法
+    allow_headers=["*"],  # 允许所有头
+)
+
+# 请求模型
+class RoleExtractRequest(BaseModel):
+    use_backup_model: bool = False
+    project_id: str
+
+# 纯文本请求模型
+class TextContentRequest(BaseModel):
+    content: str
+    use_backup_model: bool = False
+    project_id: str
+
 """
 用于提取出小说中所有的人物，并生成每个角色的专属画像提示词，以方便后序绘图。
-
-
 """
 class RoleExtractor:
-    def __init__(self, novel_path: str):
+    def __init__(self, novel_path: str = None, use_backup_model: bool = False, text_content: str = None, project_id: str = "default"):
+        # 设置项目ID
+        self.project_id = project_id
+        
+        # 创建项目目录
+        self.project_dir = os.path.join("part2_textSpilt_graphGenerate/Projects", self.project_id)
+        os.makedirs(self.project_dir, exist_ok=True)
+        
+        # 创建文件存储目录 - 所有小说文件（包括上传的和从文本转换的）都统一存放在此目录
+        files_dir = os.path.join(self.project_dir, "files")
+        os.makedirs(files_dir, exist_ok=True)
+        
+        # 如果是文本内容，先保存为文件
+        if text_content and not novel_path:
+            # 为纯文本内容创建一个唯一的标识符
+            timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+            content_hash = hashlib.md5(text_content[:100].encode()).hexdigest()[:8]
+            self.novel_name = f"text_content_{timestamp}_{content_hash}"
+            file_name = f"{self.novel_name}.txt"
+            
+            # 保存文本内容为文件
+            novel_path = os.path.join(files_dir, file_name)
+            with open(novel_path, 'w', encoding='utf-8') as f:
+                f.write(text_content)
+                
+            print(f"文本内容已保存至: {novel_path}")
+            self.novel_text = text_content
         # 文件验证与读取
-        if not os.path.exists(novel_path):
-            raise FileNotFoundError(f"小说文件不存在: {novel_path}")
-        
-        # 获取小说名称
-        self.novel_name = os.path.splitext(os.path.basename(novel_path))[0]
-        
-        # 创建小说专属目录
-        self.novel_dir = os.path.join("part2_textSpilt_graphGenerate", self.novel_name)
-        os.makedirs(self.novel_dir, exist_ok=True)
-        
-        # 创建角色信息目录
-        self.role_message_dir = os.path.join(self.novel_dir, "role_message")
-        os.makedirs(self.role_message_dir, exist_ok=True)
-        
-        with open(novel_path, 'r', encoding='utf-8') as file:
-            self.novel_text = file.read()  # 读取全部内容
+        elif novel_path:
+            if not os.path.exists(novel_path):
+                raise FileNotFoundError(f"小说文件不存在: {novel_path}")
+            
+            # 获取小说名称
+            self.novel_name = os.path.splitext(os.path.basename(novel_path))[0]
+            
+            with open(novel_path, 'r', encoding='utf-8') as file:
+                self.novel_text = file.read()  # 读取全部内容
+        else:
+            raise ValueError("必须提供小说文件路径或文本内容")
             
         if not self.novel_text:
             raise ValueError("小说文本为空")
+        
+        # 创建角色信息目录，直接放在项目目录下
+        self.role_message_dir = os.path.join(self.project_dir, "role_message")
+        os.makedirs(self.role_message_dir, exist_ok=True)
 
-        # 设置文本模型
-        self.extraction_llm = get_gemini_2_5_flash()
+        # 根据参数选择模型
+        if use_backup_model:
+            self.extraction_llm = get_backup_llm()
+        else:
+            self.extraction_llm = get_default_llm()
         
         # 初始化存储结构
         self.character_profiles = {}
@@ -169,7 +224,7 @@ class RoleExtractor:
                 raise Exception("文件未能成功创建")
         except Exception as e:
             # 如果主路径失败，尝试使用备用路径
-            backup_path = os.path.join(self.novel_dir, "role_info_backup.json")
+            backup_path = os.path.join(self.project_dir, "role_info_backup.json")
             print(f"保存到主路径失败: {e}，尝试保存到备用路径: {backup_path}")
             with open(backup_path, "w", encoding="utf-8") as f:
                 json.dump(role_info, f, ensure_ascii=False, indent=2)
@@ -183,13 +238,92 @@ class RoleExtractor:
         role_info = self.save_role_info(characters)
         return role_info
 
-if __name__ == "__main__":
-    extractor = RoleExtractor(
-        novel_path="part2_textSpilt_graphGenerate\\files\\斗破苍穹节选.txt"
-    )
-    result = extractor.process_novel()
+# API端点
+@app.post("/role-extract")
+async def extract_roles(
+    file: UploadFile = File(...),
+    use_backup_model: bool = Form(False),
+    project_id: str = Form(...)
+):
+    """
+    提取小说中的角色并生成角色画像提示词
     
-    # 打印首个人物信息
-    if result:
-        print("\n示例人物数据：")
-        print(json.dumps(result[next(iter(result))], ensure_ascii=False, indent=2)) 
+    - **file**: 上传的小说文本文件
+    - **use_backup_model**: 是否使用备用模型(默认为False，使用默认模型)
+    - **project_id**: 工程编号，用于创建对应的工程文件夹
+    
+    返回:
+        提取的角色信息JSON数据
+    """
+    # 初始化环境
+    init_environment()
+    
+    # 保存上传的文件到项目目录 - 与纯文本保存使用同一目录
+    project_files_dir = os.path.join("part2_textSpilt_graphGenerate/Projects", project_id, "files")
+    os.makedirs(project_files_dir, exist_ok=True)
+    
+    temp_file_path = os.path.join(project_files_dir, file.filename)
+    
+    # 读取文件内容并保存
+    content = await file.read()
+    with open(temp_file_path, "wb") as f:
+        f.write(content)
+    
+    try:
+        # 处理小说
+        extractor = RoleExtractor(
+            novel_path=temp_file_path,
+            use_backup_model=use_backup_model,
+            project_id=project_id
+        )
+        result = extractor.process_novel()
+        
+        # 返回处理结果
+        return {
+            "success": True,
+            "message": f"成功从 {file.filename} 中提取了 {len(result)} 个角色",
+            "data": result,
+            "project_id": project_id
+        }
+    except Exception as e:
+        # 发生错误时返回错误信息
+        raise HTTPException(status_code=500, detail=f"角色提取失败: {str(e)}")
+
+@app.post("/role-extract-text")
+async def extract_roles_from_text(request: TextContentRequest):
+    """
+    从纯文本内容中提取角色并生成角色画像提示词
+    
+    - **content**: 小说文本内容
+    - **use_backup_model**: 是否使用备用模型(默认为False，使用默认模型)
+    - **project_id**: 工程编号，用于创建对应的工程文件夹
+    
+    返回:
+        提取的角色信息JSON数据
+    """
+    # 初始化环境
+    init_environment()
+    
+    try:
+        # 处理小说，直接传递文本内容
+        extractor = RoleExtractor(
+            text_content=request.content,
+            use_backup_model=request.use_backup_model,
+            project_id=request.project_id
+        )
+        result = extractor.process_novel()
+        
+        # 返回处理结果
+        return {
+            "success": True,
+            "message": f"成功从文本内容中提取了 {len(result)} 个角色",
+            "data": result,
+            "project_id": request.project_id
+        }
+    except Exception as e:
+        # 发生错误时返回错误信息
+        raise HTTPException(status_code=500, detail=f"角色提取失败: {str(e)}")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000) 

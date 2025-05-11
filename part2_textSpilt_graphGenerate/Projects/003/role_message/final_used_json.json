@@ -1,0 +1,232 @@
+{
+  "scenes": [
+    {
+      "description": "广角镜头，温暖的春日午后，阳光透过嫩绿的树叶缝隙，斑驳地洒在石板路上。林浅浅手持一本旧书，独自一人漫步在小镇的石板小径上。",
+      "original_text": "在那个温柔的春日午后，阳光透过嫩绿的叶隙，洒在了林浅浅的肩头。她正漫步在小镇的石板路上，手里拿着一本旧书，",
+      "roles": [
+        {
+          "林浅浅": "walking, holding old book"
+        }
+      ]
+    },
+    {
+      "description": "中景推近至林浅浅的上半身，她停下脚步，微微抬头望向远方。她的眼神中流露出好奇与向往的神情。",
+      "original_text": "偶尔抬头望向远方，眼中闪烁着对未知世界的好奇与向往。",
+      "roles": [
+        {
+          "林浅浅": "looking afar, curious expression"
+        }
+      ]
+    },
+    {
+      "description": "特写镜头，林浅浅的耳朵或侧脸，她似乎听到了什么，表情微动，侧耳倾听。",
+      "original_text": "就在这时，一阵悠扬的琴声随风飘来，如同溪水潺潺，又似鸟鸣声声，瞬间吸引了林浅浅的注意。",
+      "roles": [
+        {
+          "林浅浅": "listening to music"
+        }
+      ]
+    },
+    {
+      "description": "中景，林浅浅转身，朝着琴声传来的方向走去，画面中出现一条狭窄的小巷。",
+      "original_text": "她寻声而去，穿过一条狭窄的小巷，",
+      "roles": [
+        {
+          "林浅浅": "walking towards sound"
+        }
+      ]
+    },
+    {
+      "description": "广角镜头，林浅浅走出小巷，来到一座古朴的小院前，院门紧闭。",
+      "original_text": "来到了一座古朴的小院前。",
+      "roles": [
+        {
+          "林浅浅": "arriving at gate"
+        }
+      ]
+    },
+    {
+      "description": "中景，林浅浅伸出手，轻轻推开小院的木门。",
+      "original_text": "林浅浅轻轻推开门，",
+      "roles": [
+        {
+          "林浅浅": "pushing open gate"
+        }
+      ]
+    },
+    {
+      "description": "广角镜头，门被推开，展现出小院内的景象。一位男子正坐在院中的老槐树下，面前放着一张古琴，手指在琴弦上拨动。",
+      "original_text": "琴声正是从这座小院里传出的。只见一位男子正坐在院中的老槐树下，手指在古琴的弦上跳跃。",
+      "roles": [
+        {
+          "苏墨": "playing guqin"
+        }
+      ]
+    },
+    {
+      "description": "中景推近至男子（苏墨）的上半身，他正专注于弹奏古琴，面容清晰可见。",
+      "original_text": "他的面容俊朗，眼神深邃，仿佛能洞察人心。",
+      "roles": [
+        {
+          "苏墨": "playing guqin"
+        }
+      ]
+    },
+    {
+      "description": "中景，苏墨停止弹奏，抬头看向门口站着的林浅浅。",
+      "original_text": "他见林浅浅站在门口，微微一笑，琴声也随之戛然而止。",
+      "roles": [
+        {
+          "苏墨": "smiling, stopping playing"
+        },
+        {
+          "林浅浅": "standing at gate"
+        }
+      ]
+    },
+    {
+      "description": "特写镜头，林浅浅和苏墨的目光在空中交汇。",
+      "original_text": "两人目光交汇，仿佛有千言万语在无声中传递。",
+      "roles": [
+        {
+          "林浅浅": "making eye contact"
+        },
+        {
+          "苏墨": "making eye contact"
+        }
+      ]
+    },
+    {
+      "description": "蒙太奇镜头1：广角，林浅浅和苏墨并肩漫步在开满鲜花的田野中，阳光明媚。",
+      "original_text": "从那以后，林浅浅和苏墨成了无话不谈的朋友。他们一起漫步在春日的花海中，",
+      "roles": [
+        {
+          "林浅浅": "walking in flowers"
+        },
+        {
+          "苏墨": "walking in flowers"
+        }
+      ]
+    },
+    {
+      "description": "蒙太奇镜头2：中景，林浅浅和苏墨坐在一起，手中拿着书本，似乎在讨论着什么。",
+      "original_text": "一起探讨书中的哲理，",
+      "roles": [
+        {
+          "林浅浅": "discussing, holding book"
+        },
+        {
+          "苏墨": "discussing, holding book"
+        }
+      ]
+    },
+    {
+      "description": "蒙太奇镜头3：广角仰拍，夜晚，林浅浅和苏墨躺在草地上，仰望着满天繁星。",
+      "original_text": "一起在夜晚仰望星空，诉说着彼此的梦想与未来。",
+      "roles": [
+        {
+          "林浅浅": "looking at stars"
+        },
+        {
+          "苏墨": "looking at stars"
+        }
+      ]
+    },
+    {
+      "description": "广角镜头，夜色下的古朴小院，月光如水般洒满地面。林浅浅和苏墨站在那棵老槐树下。",
+      "original_text": "然而，美好的时光总是短暂的。林浅浅因家事需要离开小镇，临行前夜，他们相约在那棵老槐树下。月光如水，洒满了整个小院，",
+      "roles": [
+        {
+          "林浅浅": "standing under tree"
+        },
+        {
+          "苏墨": "standing under tree"
+        }
+      ]
+    },
+    {
+      "description": "中景，林浅浅和苏墨紧紧相拥在一起。",
+      "original_text": "两人紧紧相拥，",
+      "roles": [
+        {
+          "林浅浅": "embracing 苏墨"
+        },
+        {
+          "苏墨": "embracing 林浅浅"
+        }
+      ]
+    },
+    {
+      "description": "特写镜头，林浅浅和苏墨的脸庞，眼眶中似乎有泪光闪烁。",
+      "original_text": "泪水在眼眶中打转。",
+      "roles": [
+        {
+          "林浅浅": "tears in eyes"
+        },
+        {
+          "苏墨": "tears in eyes"
+        }
+      ]
+    },
+    {
+      "description": "中景，苏墨看着林浅浅，轻轻点了点头。",
+      "original_text": "苏墨默默点头，",
+      "roles": [
+        {
+          "苏墨": "nodding head"
+        }
+      ]
+    },
+    {
+      "description": "近景，苏墨从怀中或手中拿出一枚古玉佩，将其递给林浅浅。",
+      "original_text": "将一枚刻有他们名字的古玉佩交给了林浅浅：",
+      "roles": [
+        {
+          "苏墨": "giving jade pendant"
+        },
+        {
+          "林浅浅": "receiving jade pendant"
+        }
+      ]
+    },
+    {
+      "description": "特写镜头，古玉佩在林浅浅的手中，或两人手交接玉佩的瞬间。",
+      "original_text": "“这是我们的信物，愿它能代替我陪伴在你身边。”",
+      "roles": [
+        {
+          "林浅浅": "holding jade pendant"
+        },
+        {
+          "苏墨": "holding jade pendant"
+        }
+      ]
+    },
+    {
+      "description": "广角镜头，林浅浅背对着镜头，沿着一条小路远去，身影逐渐变小。",
+      "original_text": "林浅浅带着苏墨的祝福与思念，踏上了离别的路。",
+      "roles": [
+        {
+          "林浅浅": "walking away"
+        }
+      ]
+    },
+    {
+      "description": "中景，苏墨独自一人站在小院中，手中拿着画笔和画板，似乎在画着什么。",
+      "original_text": "而苏墨则留在小镇，用画笔记录着他们共同度过的每一个美好瞬间，",
+      "roles": [
+        {
+          "苏墨": "painting in courtyard"
+        }
+      ]
+    },
+    {
+      "description": "远景，苏墨站在小院门口，眺望着林浅浅离去的方向。",
+      "original_text": "等待着林浅浅的归来。",
+      "roles": [
+        {
+          "苏墨": "looking into distance"
+        }
+      ]
+    }
+  ]
+}

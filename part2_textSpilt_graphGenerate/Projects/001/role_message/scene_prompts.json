@@ -1,0 +1,394 @@
+{
+  "scene_prompts": [
+    {
+      "prompt": "(0 people), crowded street, August noon, heat haze, asphalt road",
+      "description": "街道全景，八月正午的阳光炙烤着沥青路面，蝉鸣和鸣笛声嘈杂，街道上人流涌动，远处建筑轮廓在热浪中扭曲。",
+      "original_text": "炎炎八月。\n\n滴滴滴\n\n刺耳的蝉鸣混杂着此起彼伏的鸣笛声,回荡在人流湍急的街道上,灼热的阳光炙烤着灰褐色的沥青路面,热量\n涌动,整个街道仿佛都扭曲了起来。",
+      "timestamp": "2025-05-03 13:06:13"
+    },
+    {
+      "prompt": "(3 people:1.2, young adults), roadside trees, smoking, waiting",
+      "description": "几个小年轻聚集在路边树荫下，有人抽烟，表情慵懒。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 13:08:39"
+    },
+    {
+      "prompt": "(No people), summer street, crowded street, high temperature, asphalt road, car horns",
+      "description": "夏日炎炎，街道上人流湍急，沥青路面被晒得发白，空气因高温扭曲，远处传来此起彼伏的鸣笛声。",
+      "original_text": "炎炎八月。\n刺耳的蝉鸣混杂着此起彼伏的鸣笛声,回荡在人流湍急的街道上,灼热的阳光炙烤着灰褐色的沥青路面,热量\n涌动,整个街道仿佛都扭曲了起来。",
+      "timestamp": "2025-05-03 16:22:13"
+    },
+    {
+      "prompt": "(No people), summer street, crowded street, heat haze, asphalt road, sounds",
+      "description": "夏日炎炎，街道上人流湍急，沥青路面被晒得发白，空气因高温扭曲，远处传来此起彼伏的鸣笛声。",
+      "original_text": "炎炎八月。\n刺耳的蝉鸣混杂着此起彼伏的鸣笛声,回荡在人流湍急的街道上,灼热的阳光炙烤着灰褐色的沥青路面,热量\n涌动,整个街道仿佛都扭曲了起来。",
+      "timestamp": "2025-05-03 16:41:49"
+    },
+    {
+      "prompt": "(No people), summer street, busy road, ((intense heat)), grey asphalt, ((heat haze)), sounds",
+      "description": "夏日炎炎，街道上人流湍急，沥青路面被晒得发白，空气因高温扭曲，远处传来此起彼伏的鸣笛声。",
+      "original_text": "炎炎八月。\n刺耳的蝉鸣混杂着此起彼伏的鸣笛声,回荡在人流湍急的街道上,灼热的阳光炙烤着灰褐色的沥青路面,热量\n涌动,整个街道仿佛都扭曲了起来。",
+      "timestamp": "2025-05-03 17:01:58"
+    },
+    {
+      "prompt": "(No people), summer street, ((intense heat)), busy road, grey asphalt, heat haze, sounds",
+      "description": "夏日炎炎，街道上人流湍急，沥青路面被晒得发白，空气因高温扭曲，远处传来此起彼伏的鸣笛声。",
+      "original_text": "炎炎八月。\n刺耳的蝉鸣混杂着此起彼伏的鸣笛声,回荡在人流湍急的街道上,灼热的阳光炙烤着灰褐色的沥青路面,热量\n涌动,整个街道仿佛都扭曲了起来。",
+      "timestamp": "2025-05-03 17:07:34"
+    },
+    {
+      "prompt": "(No people), summer street, busy, ((heat haze)), asphalt, ((intense heat)), sounds",
+      "description": "夏日炎炎，街道上人流湍急，沥青路面被晒得发白，空气因高温扭曲，远处传来此起彼伏的鸣笛声。",
+      "original_text": "炎炎八月。\n刺耳的蝉鸣混杂着此起彼伏的鸣笛声,回荡在人流湍急的街道上,灼热的阳光炙烤着灰褐色的沥青路面,热量\n涌动,整个街道仿佛都扭曲了起来。",
+      "timestamp": "2025-05-03 17:25:02"
+    },
+    {
+      "prompt": "(several young people), street, ((tree shade)), gathered, ((smoking)), waiting traffic light, casual clothes",
+      "description": "街道旁稀疏的树荫下，几个年轻人围在一起，有人嘴里叼着烟，他们正等待着红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 17:25:17"
+    },
+    {
+      "prompt": "(several young people), street, ((tree shade)), gathered, ((smoking)), waiting traffic light, casual clothes",
+      "description": "街道旁稀疏的树荫下，几个年轻人围在一起，有人嘴里叼着烟，他们正等待着红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 17:30:05"
+    },
+    {
+      "prompt": "(several young people), street, ((tree shade)), gathered, ((smoking)), waiting traffic light, casual clothes",
+      "description": "街道旁稀疏的树荫下，几个年轻人围在一起，有人嘴里叼着烟，他们正等待着红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 17:35:25"
+    },
+    {
+      "prompt": "(3 people) (street side), (sparse tree shade), young people gather, (waiting traffic light), one smoking",
+      "description": "街道旁稀疏的树荫下，几个年轻人围在一起，有人嘴里叼着烟，他们正等待着红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 17:39:26"
+    },
+    {
+      "prompt": "(1 girl:1.3), (school uniform), (sweat droplets), (big black eyes), (concerning look), (teenage boy), (crossing street)",
+      "description": "一个穿着校服的小女孩出现在少年身边，她脸上带着汗珠，用纯粹而担忧的大眼睛看着少年。",
+      "original_text": "“哥哥,我扶你过马路吧?”\n那是个穿着校服的小女孩,十二三岁左右,脸颊上带着几滴晶莹的汗珠,一双乌黑的大眼睛正担忧的注视着少\n年,纯粹而简单。",
+      "timestamp": "2025-05-03 17:40:19"
+    },
+    {
+      "prompt": "(3 people), (street side), (tree shade), young people gathering, (smoking), (waiting)",
+      "description": "街道旁稀疏的树荫下，几个年轻人围在一起，有人嘴里叼着烟，他们正等待着红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 17:45:35"
+    },
+    {
+      "prompt": "(3 people), (street side), (tree shade), young people gathering, (smoking), (waiting)",
+      "description": "街道旁稀疏的树荫下，几个年轻人围在一起，有人嘴里叼着烟，他们正等待着红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 17:47:34"
+    },
+    {
+      "prompt": "(3 people), (street side), (tree shade), young people, (gathering), (smoking), (waiting)",
+      "description": "街道旁稀疏的树荫下，几个年轻人围在一起，有人嘴里叼着烟，他们正等待着红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 17:49:03"
+    },
+    {
+      "prompt": "(3 people), (street side), (tree shade), (gathering), (smoking), (waiting)",
+      "description": "街道旁稀疏的树荫下，几个年轻人围在一起，有人嘴里叼着烟，他们正等待着红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 17:49:45"
+    },
+    {
+      "prompt": "(3 people), street side, sparse tree shade, young people, gathering, smoking, waiting",
+      "description": "街道旁稀疏的树荫下，几个年轻人围在一起，有人嘴里叼着烟，他们正等待着红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 17:51:37"
+    },
+    {
+      "prompt": "(1 young man) (smoking), (suspicious look), (street corner focus), (murmur)",
+      "description": "镜头推近，聚焦在其中一个年轻人（阿诺）身上，他嘴里叼着烟，突然目光锁定街角某处，发出轻微的疑惑声。",
+      "original_text": "突然,一个正在吞云吐雾的小年轻似乎是发现了什么,轻咦了一声,目光落在了街角某处。",
+      "timestamp": "2025-05-03 17:52:24"
+    },
+    {
+      "prompt": "(3 young people), street side, sparse tree shade, gathering, smoking, waiting traffic light",
+      "description": "街道旁稀疏的树荫下，几个年轻人围在一起，有人嘴里叼着烟，他们正等待着红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 17:54:01"
+    },
+    {
+      "prompt": "(0 people), ((busy city street)), August heat, wide angle, cars, cicadas",
+      "description": "广角镜头，俯瞰或平视视角，展现一个炎热的八月午后繁忙的城市街道。空气中弥漫着热浪，沥青路面因高温而显得扭曲。车辆鸣笛声和蝉鸣声混合在一起，背景是来往的行人和车辆。",
+      "original_text": "炎炎八月。\n刺耳的蝉鸣混杂着此起彼伏的鸣笛声,回荡在人流湍急的街道上,灼热的阳光炙烤着灰褐色的沥青路面,热量\n涌动,整个街道仿佛都扭曲了起来。",
+      "timestamp": "2025-05-03 18:58:19"
+    },
+    {
+      "prompt": "(3 people:1.2, 2 boys and 1 girl), ((street side)), ((tree shade)), ((young adults)), huddled, waiting traffic light, cigarette, casual clothes, mid-shot",
+      "description": "中景镜头，聚焦在街道一侧树荫下的几个年轻人。他们簇拥在一起，有人嘴里叼着烟，一起等待着变幻的红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 18:58:24"
+    },
+    {
+      "prompt": "((1 man:1.4)), ((close-up)), smoking, looking street corner, casual clothes",
+      "description": "特写镜头，聚焦在其中一个年轻人（阿诺）的脸上。他正在吸烟，突然表情微变，发出轻微的“咦”声，目光转向街角方向。",
+      "original_text": "突然,一个正在吞云吐雾的小年轻似乎是发现了什么,轻咦了一声,目光落在了街角某处。",
+      "timestamp": "2025-05-03 18:58:33"
+    },
+    {
+      "prompt": "(1 person:1.2, a boy), ((turning head)), ((looking)), street side, tree shade, casual clothes, mid-shot",
+      "description": "中景镜头，阿诺的同伴转头看向阿诺。",
+      "original_text": "“阿诺,你在看什么？“他身旁的同伴问道。",
+      "timestamp": "2025-05-03 18:58:38"
+    },
+    {
+      "prompt": "(1 man:1.4), ((staring)), ((looking street corner)), ((speaking)), casual clothes, mid-shot",
+      "description": "中景或特写镜头，阿诺呆滞地望着街角方向，然后缓缓开口。",
+      "original_text": "那个名为阿诺的年轻人呆呆的望着街角,半晌才开口,“你说 ……. 盲人怎么过马路？”",
+      "timestamp": "2025-05-03 18:58:45"
+    },
+    {
+      "prompt": "(1 person:1.2, a boy), ((speaking hesitantly)), street side, tree shade, casual clothes",
+      "description": "中景镜头，阿诺的同伴听到问题后先是一愣，然后迟疑地回答。",
+      "original_text": "同伴一愣,迟疑了片刻之后,缓缓开口:“一般来说,盲人出门都有人照看,或者导盲犬引导,要是在现代点\n的城市的话,马路边上也有红绿灯的语音播报,实在不行的话,或许能靠着声音和导盲杖一点点挪过去？“",
+      "timestamp": "2025-05-03 18:58:50"
+    },
+    {
+      "prompt": "(1 man:1.4), ((shaking head)), ((speaking)), street side, tree shade, casual clothes, mid-shot",
+      "description": "中景镜头，阿诺摇头，提出更极端的情况。",
+      "original_text": "阿诺摇了摇头,“那如果即没人照看,又没导盲犬,也没有语音播报,甚至连导盲杖都用来拎花生油了呢？”",
+      "timestamp": "2025-05-03 18:58:55"
+    },
+    {
+      "prompt": "(1 person:1.2, a boy), ((close-up)), ((speechless expression)), casual clothes, street side, tree shade",
+      "description": "特写镜头，阿诺同伴的脸上露出无语或不信的表情。",
+      "original_text": "“ …… 你觉得你很幽默？“",
+      "timestamp": "2025-05-03 18:59:01"
+    },
+    {
+      "prompt": "(1 boy:1.2), casual clothes, ((rolling eyes)), ((looking street corner)), ((frozen))",
+      "description": "中景镜头，阿诺的同伴翻了个白眼，然后顺着阿诺的目光看向街角，瞬间呆住。",
+      "original_text": "同伴翻了个白眼,顺着阿诺的目光看过去,下一刻整个人都呆在了原地。",
+      "timestamp": "2025-05-03 18:59:10"
+    },
+    {
+      "prompt": "(1 boy:1.3), ((wide shot)), street corner, standing, black short-sleeved shirt",
+      "description": "远景镜头，从阿诺他们所在的街边看向马路对角。画面中出现一个少年，他站在那里，双眼被厚厚的黑色布缎缠绕，穿着黑色短袖。",
+      "original_text": "只见在马路的对角,一个穿着黑色短袖的少年正站在那,双眼上缠着厚厚几圈黑色布缎,严严实实的挡住了所\n有光线。",
+      "timestamp": "2025-05-03 18:59:15"
+    },
+    {
+      "prompt": "(1 boy:1.3), ((street corner)), ((holding bag)), ((carrying cane)), ((oil bucket)), black shirt",
+      "description": "中景或近景镜头，聚焦在少年身上。他的左手拎着装满蔬菜的廉价购物袋，右手将一根导盲杖扛在肩上，导盲杖末端挂着一桶黄澄澄的花生油，油桶在阳光下闪闪发光。",
+      "original_text": "他的左手拎着满载蔬菜的廉价购物袋,右手拽着扛在肩上的导盲杖,像是在扛一根扁担,而在导盲杖的末端,\n一大桶黄澄澄的花生油正在阳光下闪闪发光！",
+      "timestamp": "2025-05-03 18:59:21"
+    },
+    {
+      "prompt": "(many people), wide shot, busy city street, hot august, (heat haze), (distorted asphalt), vehicles",
+      "description": "广角镜头，俯瞰或平视视角，展现一个炎热的八月午后繁忙的城市街道。空气中弥漫着热浪，沥青路面因高温而显得扭曲。车辆鸣笛声和蝉鸣声混合在一起，背景是来往的行人和车辆。",
+      "original_text": "炎炎八月。\n刺耳的蝉鸣混杂着此起彼伏的鸣笛声,回荡在人流湍急的街道上,灼热的阳光炙烤着灰褐色的沥青路面,热量\n涌动,整个街道仿佛都扭曲了起来。",
+      "timestamp": "2025-05-03 19:03:46"
+    },
+    {
+      "prompt": "(3-5 young people), (mid shot), (tree shade), street side, (smoking), (waiting traffic light), hot street",
+      "description": "中景镜头，聚焦在街道一侧树荫下的几个年轻人。他们簇拥在一起，有人嘴里叼着烟，一起等待着变幻的红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 19:03:51"
+    },
+    {
+      "prompt": "(1 man:1.2), (close up), smoking, street corner, (t-shirt), street background",
+      "description": "特写镜头，聚焦在其中一个年轻人（阿诺）的脸上。他正在吸烟，突然表情微变，发出轻微的“咦”声，目光转向街角方向。",
+      "original_text": "突然,一个正在吞云吐雾的小年轻似乎是发现了什么,轻咦了一声,目光落在了街角某处。",
+      "timestamp": "2025-05-03 19:03:59"
+    },
+    {
+      "prompt": "(2-3 young people), (mid shot), street side, (tree shade), (turning head), casual wear, street background",
+      "description": "中景镜头，阿诺的同伴转头看向阿诺。",
+      "original_text": "“阿诺,你在看什么？“他身旁的同伴问道。",
+      "timestamp": "2025-05-03 19:04:07"
+    },
+    {
+      "prompt": "(1 man:1.2), (mid shot/close up), looking, speaking, casual wear, street background, hot",
+      "description": "中景或特写镜头，阿诺呆滞地望着街角方向，然后缓缓开口。",
+      "original_text": "那个名为阿诺的年轻人呆呆的望着街角,半晌才开口,“你说 ……. 盲人怎么过马路？”",
+      "timestamp": "2025-05-03 19:04:16"
+    },
+    {
+      "prompt": "(1 man:1.2), (mid shot), street side, tree shade, casual wear, pausing, speaking",
+      "description": "中景镜头，阿诺的同伴听到问题后先是一愣，然后迟疑地回答。",
+      "original_text": "同伴一愣,迟疑了片刻之后,缓缓开口:“一般来说,盲人出门都有人照看,或者导盲犬引导,要是在现代点\n的城市的话,马路边上也有红绿灯的语音播报,实在不行的话,或许能靠着声音和导盲杖一点点挪过去？“",
+      "timestamp": "2025-05-03 19:04:24"
+    },
+    {
+      "prompt": "(1 man:1.2), (mid shot), (shaking head), (speaking), (casual wear), street background, hot afternoon",
+      "description": "中景镜头，阿诺摇头，提出更极端的情况。",
+      "original_text": "阿诺摇了摇头,“那如果即没人照看,又没导盲犬,也没有语音播报,甚至连导盲杖都用来拎花生油了呢？”",
+      "timestamp": "2025-05-03 19:04:29"
+    },
+    {
+      "prompt": "(1 man:1.3), (close up), looking, (casual wear), (street side), (tree shade), (hot afternoon)",
+      "description": "特写镜头，阿诺同伴的脸上露出无语或不信的表情。",
+      "original_text": "“ …… 你觉得你很幽默？“",
+      "timestamp": "2025-05-03 19:04:39"
+    },
+    {
+      "prompt": "(1 man:1.3), (mid shot), (casual wear), (street side), (tree shade), (rolling eyes), (looking street corner), (stunned), (hot afternoon)",
+      "description": "中景镜头，阿诺的同伴翻了个白眼，然后顺着阿诺的目光看向街角，瞬间呆住。",
+      "original_text": "同伴翻了个白眼,顺着阿诺的目光看过去,下一刻整个人都呆在了原地。",
+      "timestamp": "2025-05-03 19:04:44"
+    },
+    {
+      "prompt": "(1 young man), (long shot), opposite corner, standing, black shirt, street background",
+      "description": "远景镜头，从阿诺他们所在的街边看向马路对角。画面中出现一个少年，他站在那里，双眼被厚厚的黑色布缎缠绕，穿着黑色短袖。",
+      "original_text": "只见在马路的对角,一个穿着黑色短袖的少年正站在那,双眼上缠着厚厚几圈黑色布缎,严严实实的挡住了所\n有光线。",
+      "timestamp": "2025-05-03 19:04:50"
+    },
+    {
+      "prompt": "(1 young man), (mid shot/close up), black shirt, holding (grocery bag), carrying (white cane), (peanut oil bucket), (sunlight)",
+      "description": "中景或近景镜头，聚焦在少年身上。他的左手拎着装满蔬菜的廉价购物袋，右手将一根导盲杖扛在肩上，导盲杖末端挂着一桶黄澄澄的花生油，油桶在阳光下闪闪发光。",
+      "original_text": "他的左手拎着满载蔬菜的廉价购物袋,右手拽着扛在肩上的导盲杖,像是在扛一根扁担,而在导盲杖的末端,\n一大桶黄澄澄的花生油正在阳光下闪闪发光！",
+      "timestamp": "2025-05-03 19:04:56"
+    },
+    {
+      "prompt": "(1 young man), (mid shot/close up), black shirt, (holding grocery bag), (white cane on shoulder), (oil bucket on shoulder), (sunlight)",
+      "description": "特写或中景镜头，强调少年黑布缠绕的双眼、肩上的导盲杖、左手的蔬菜袋和右手扛油的姿势。画面突出这些独特的视觉元素。",
+      "original_text": "黑缎缠目,盲杖在肩,左手蔬菜,右手抗油 .....",
+      "timestamp": "2025-05-03 19:05:07"
+    },
+    {
+      "prompt": "(many people:1.2), (wide shot), street corner, (turning heads), looking, (casual wear), (hot afternoon)",
+      "description": "广角镜头，展示街角周围的其他行人，他们注意到少年的独特景象，纷纷转头看向他，露出好奇、惊讶或不解的表情。",
+      "original_text": "这匪夷所思的画面,顿时吸引了周围一大波人的注意力。",
+      "timestamp": "2025-05-03 19:05:13"
+    },
+    {
+      "prompt": "(3-5 people), (mid shot), pedestrians, street side, (casual wear), (looking), (whispering), (hot afternoon)",
+      "description": "中景镜头，聚焦在几个窃窃私语的行人身上。他们看着少年，小声议论着。",
+      "original_text": "“诶,你看,那人好怪啊。”\n“眼睛上蒙着这么多布,能看得见路吗？”\n“你没看到他手里的导盲杖吗,人家本来就是个盲人好吧？”\n“这都什么年代了,盲人基本都戴墨镜了,谁还大热天的用布缎缠着眼睛,不怕捂的慌吗？“\n“就是,而且你见过哪个盲人不用导盲杖走路,反而用来扛东西的？”\n“现在的年轻人真会玩。”",
+      "timestamp": "2025-05-03 19:05:19"
+    },
+    {
+      "prompt": "(many people), (street corner), (mid shot/wide shot), (whispering), (looking), (traffic light), (flashing red)",
+      "description": "中景或广角镜头，展示周围行人窃窃私语的场景，同时画面中包含路口的交通信号灯，红灯正在闪烁。",
+      "original_text": "夏日的蝉鸣也掩盖不住周围行人的窃窃私语,他们好奇的打量着那少年,小声讨论着他到底是真盲还是假盲,\n同时有些期待的看着闪烁的红灯。",
+      "timestamp": "2025-05-03 19:05:25"
+    },
+    {
+      "prompt": "(2 people:1.2, a girl and a young man), (mid shot), girl (school uniform), young man (black shirt), (carrying oil), street corner, (hot afternoon)",
+      "description": "中景镜头，一个穿着校服的小女孩走到少年身边。她脸上带着汗珠，用担忧的眼神看着少年。",
+      "original_text": "就在这时,一个清脆的声音从少年的身边响起。\n“哥哥,我扶你过马路吧？”\n那是个穿着校服的小女孩,十二三岁左右,脸颊上带着几滴晶莹的汗珠,一双乌黑的大眼睛正担忧的注视着少\n年,纯粹而简单。",
+      "timestamp": "2025-05-03 19:05:45"
+    },
+    {
+      "prompt": "(1 young man:1.3), (close up), (turning head), smiling, black shirt, (street corner), (hot afternoon), (carrying oil)",
+      "description": "特写镜头，聚焦在少年被布缎缠绕的脸上。他微微一愣，头转向小女孩的方向，嘴角露出一丝微笑。",
+      "original_text": "少年微微一愣,侧过头看向小女孩的方向,嘴角浮现出一抹微笑。",
+      "timestamp": "2025-05-03 19:05:52"
+    },
+    {
+      "prompt": "(1 young man, 1 girl), mid shot, grocery bag, wiping sweat, (holding hand)",
+      "description": "中景镜头，少年将左手的蔬菜袋挂到右手上，用左手衣角擦了擦汗，然后伸出左手轻轻握住小女孩的手。",
+      "original_text": "他将拎着蔬菜的袋子挂在右手上,腾出左手在衣角擦了擦汗,轻轻握住了小女孩的手掌。",
+      "timestamp": "2025-05-03 19:06:00"
+    },
+    {
+      "prompt": "(close up), traffic light, red light off, green light on",
+      "description": "特写镜头，聚焦在交通信号灯，红灯熄灭，绿灯亮起。",
+      "original_text": "啪嗒 -!\n绿灯亮起。",
+      "timestamp": "2025-05-03 19:06:07"
+    },
+    {
+      "prompt": "(2 people:1.2), hand in hand, walking, street crossing, mid shot/wide shot",
+      "description": "广角或中景镜头，少年和小女孩手牵手，一起迈步走向马路对面。",
+      "original_text": "少年迈开步子,和小女孩一起朝着马路的对面走去。",
+      "timestamp": "2025-05-03 19:06:14"
+    },
+    {
+      "prompt": "(3-5 young people), mid shot, street side, tree shade, smoking, waiting traffic light",
+      "description": "中景镜头，聚焦在街道一侧树荫下的几个年轻人。他们簇拥在一起，有人嘴里叼着烟，一起等待着变幻的红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 19:20:13"
+    },
+    {
+      "prompt": "(3-5 young people), mid shot, street side, tree shade, smoking, waiting traffic light",
+      "description": "中景镜头，聚焦在街道一侧树荫下的几个年轻人。他们簇拥在一起，有人嘴里叼着烟，一起等待着变幻的红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 19:21:13"
+    },
+    {
+      "prompt": "(3-5 young people), mid shot, street side, (tree shade), smoking, waiting traffic light",
+      "description": "中景镜头，聚焦在街道一侧树荫下的几个年轻人。他们簇拥在一起，有人嘴里叼着烟，一起等待着变幻的红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 19:26:04"
+    },
+    {
+      "prompt": "3-5 young people, mid shot, street side, tree shade, smoking, waiting traffic light",
+      "description": "中景镜头，聚焦在街道一侧树荫下的几个年轻人。他们簇拥在一起，有人嘴里叼着烟，一起等待着变幻的红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 19:35:57"
+    },
+    {
+      "prompt": "3-5 young people, mid shot, street side, tree shade, smoking, waiting traffic light",
+      "description": "中景镜头，聚焦在街道一侧树荫下的几个年轻人。他们簇拥在一起，有人嘴里叼着烟，一起等待着变幻的红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 19:36:09"
+    },
+    {
+      "prompt": "(3-5 young people), mid shot, street side, tree shade, smoking, waiting traffic light",
+      "description": "中景镜头，聚焦在街道一侧树荫下的几个年轻人。他们簇拥在一起，有人嘴里叼着烟，一起等待着变幻的红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 19:36:40"
+    },
+    {
+      "prompt": "3-5 young people, mid shot, street side, tree shade, smoking, waiting traffic light",
+      "description": "中景镜头，聚焦在街道一侧树荫下的几个年轻人。他们簇拥在一起，有人嘴里叼着烟，一起等待着变幻的红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 19:38:16"
+    },
+    {
+      "prompt": "3-5 young people, mid shot, street side, tree shade, smoking, waiting traffic light",
+      "description": "中景镜头，聚焦在街道一侧树荫下的几个年轻人。他们簇拥在一起，有人嘴里叼着烟，一起等待着变幻的红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 19:38:25"
+    },
+    {
+      "prompt": "(3 young people:1.3), street side, tree shade, clustered, smoking, waiting traffic",
+      "description": "中景镜头，聚焦在街道一侧树荫下的几个年轻人。他们簇拥在一起，有人嘴里叼着烟，一起等待着变幻的红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 19:39:22"
+    },
+    {
+      "prompt": "(1 boy:1.4), across street, black t-shirt, standing still",
+      "description": "远景镜头，从阿诺他们所在的街边看向马路对角。画面中出现一个少年，他站在那里，双眼被厚厚的黑色布缎缠绕，穿着黑色短袖。",
+      "original_text": "只见在马路的对角,一个穿着黑色短袖的少年正站在那,双眼上缠着厚厚几圈黑色布缎,严严实实的挡住了所\n有光线。",
+      "timestamp": "2025-05-03 19:40:53"
+    },
+    {
+      "prompt": "(multiple people:1.3), street corner, traffic light, red light flashing, whispering, boy black t-shirt",
+      "description": "中景或广角镜头，展示周围行人窃窃私语的场景，同时画面中包含路口的交通信号灯，红灯正在闪烁。",
+      "original_text": "夏日的蝉鸣也掩盖不住周围行人的窃窃私语,他们好奇的打量着那少年,小声讨论着他到底是真盲还是假盲,\n同时有些期待的看着闪烁的红灯。",
+      "timestamp": "2025-05-03 19:44:27"
+    },
+    {
+      "prompt": "(2 people:1.3, a girl and a boy), street corner, girl approaching, girl school uniform, boy black t-shirt, girl looking at boy, medium shot",
+      "description": "中景镜头，一个穿着校服的小女孩走到少年身边。她脸上带着汗珠，用担忧的眼神看着少年。",
+      "original_text": "就在这时,一个清脆的声音从少年的身边响起。\n“哥哥,我扶你过马路吧？”\n那是个穿着校服的小女孩,十二三岁左右,脸颊上带着几滴晶莹的汗珠,一双乌黑的大眼睛正担忧的注视着少\n年,纯粹而简单。",
+      "timestamp": "2025-05-03 19:45:29"
+    },
+    {
+      "prompt": "(2 people:1.3, a boy and a girl), street corner, (medium shot), boy (black t-shirt), girl (school uniform), boy holding bag, boy wiping sweat, boy holding girl hand",
+      "description": "中景镜头，少年将左手的蔬菜袋挂到右手上，用左手衣角擦了擦汗，然后伸出左手轻轻握住小女孩的手。",
+      "original_text": "他将拎着蔬菜的袋子挂在右手上,腾出左手在衣角擦了擦汗,轻轻握住了小女孩的手掌。",
+      "timestamp": "2025-05-03 19:47:41"
+    },
+    {
+      "prompt": "(traffic light:1.5), (close-up), red light off, green light on, (no people:1.2)",
+      "description": "特写镜头，聚焦在交通信号灯，红灯熄灭，绿灯亮起。",
+      "original_text": "啪嗒 -!\n绿灯亮起。",
+      "timestamp": "2025-05-03 19:48:43"
+    },
+    {
+      "prompt": "(2 people:1.3, a boy and a girl), hand in hand, crossing street, wide shot or medium shot, moving towards opposite side",
+      "description": "广角或中景镜头，少年和小女孩手牵手，一起迈步走向马路对面。",
+      "original_text": "少年迈开步子,和小女孩一起朝着马路的对面走去。",
+      "timestamp": "2025-05-03 19:52:07"
+    }
+  ]
+}

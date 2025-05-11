@@ -1,0 +1,16 @@
+{
+  "scene_prompts": [
+    {
+      "prompt": "(3 young men:1.3), street side, tree shade, waiting, traffic light, casual clothes, smoking",
+      "description": "中景。街道旁，几棵稀疏的树木投下不大的树荫。树荫下，几个年轻男性聚在一起，或站或靠，有人嘴里叼着烟，神情慵懒地等待着红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 14:09:13"
+    },
+    {
+      "prompt": "(3 young men:1.3), street side, tree shade, waiting, traffic light, casual clothes, smoking",
+      "description": "中景。街道旁，几棵稀疏的树木投下不大的树荫。树荫下，几个年轻男性聚在一起，或站或靠，有人嘴里叼着烟，神情慵懒地等待着红绿灯。",
+      "original_text": "路边为数不多的几团树荫下,几个小年轻正簇在一起,叼着烟等待着红绿灯。",
+      "timestamp": "2025-05-03 14:09:46"
+    }
+  ]
+}

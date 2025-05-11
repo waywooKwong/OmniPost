@@ -1,5 +1,5 @@
 """
-调用 stablediffusion 生成图片
+调用 stablediffusion 生成图片，并提供FastAPI接口
 
 
 """
@@ -9,7 +9,11 @@ import io
 import base64
 from PIL import Image
 import os
- 
+from typing import List, Optional, Union, Dict, Any
+import uvicorn
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, Field
+
 # url = "http://127.0.0.1:7860"
  
 # prompt = "dog"
@@ -53,6 +57,28 @@ import os
  
 # image.show()
 # image.save('output.png')
+
+# FastAPI 请求模型定义
+class SDGenerateRequest(BaseModel):
+    prompt: str
+    negative_prompt: str = ""
+    batch_size: int = Field(default=1, ge=1, le=4)
+    seed: int = Field(default=-1)
+    sampler_name: str = "Euler a"
+    use_regional_prompter: bool = False
+    regional_prompt_mode: str = "Columns"
+    regional_prompt_ratios: str = "1,1"
+    enable_hr: bool = False
+    model_name: str = "wolfboys2D_v10.safetensors [62d679b7a0]"
+    save_dir: Optional[str] = None
+
+# FastAPI 响应模型定义
+class SDGenerateResponse(BaseModel):
+    images: List[str]
+    seeds: List[int]
+    info: Dict[str, Any]
+    save_paths: Optional[List[str]] = None
+
 class SD_Generate:
     def __init__(self) -> None:
         #初始化定义
@@ -70,11 +96,13 @@ class SD_Generate:
            regional_prompt_ratios="1,1",
            #高清修复
            enable_hr=False,
+           #选择模型
+           model_name="wolfboys2D_v10.safetensors [62d679b7a0]",
     ):
         self.payload = {
             # 模型设置
             "override_settings":{
-                "sd_model_checkpoint": "wolfboys2D_v10.safetensors [62d679b7a0]",
+                "sd_model_checkpoint": model_name,
                 "sd_vae": "vae-ft-mse-840000-ema-pruned.safetensors",
                 "CLIP_stop_at_last_layers": 2,
             },
@@ -144,23 +172,39 @@ class SD_Generate:
             
             # 解析返回的info信息（如果存在）
             if 'info' in self.r:
-                info = json.loads(self.r['info'])
-                self.seeds = info.get('all_seeds', [])
-                print("生成信息：", info)
+                self.info = json.loads(self.r['info'])
+                self.seeds = self.info.get('all_seeds', [])
+                print("生成信息：", self.info)
                 print("使用的种子：", self.seeds)
             else:
                 print("警告：未在返回结果中找到info信息")
                 self.seeds = []
+                self.info = {}
         except Exception as e:
             print(f"生成图像时出错: {str(e)}")
             self.r = {'images': []}
+            self.seeds = []
+            self.info = {}
 
     #保存图片
     def save_img(self, save_dir: str):
         try:
             images = []
-            # 创建保存目录
-            os.makedirs(os.path.dirname(save_dir), exist_ok=True)
+            save_paths = []
+            
+            # 检查保存路径是否有效
+            if not save_dir or save_dir.strip() == "":
+                print("警告：保存路径为空，将使用默认路径")
+                save_dir = "output/images"
+            
+            # 获取目录部分并创建目录
+            directory = os.path.dirname(save_dir)
+            if directory == "":  # 如果没有目录部分，使用默认目录
+                directory = "output/images"
+                save_dir = os.path.join(directory, os.path.basename(save_dir) or "image")
+            
+            # 确保目录存在
+            os.makedirs(directory, exist_ok=True)
             
             if 'images' not in self.r:
                 raise ValueError("No images generated")
@@ -168,71 +212,67 @@ class SD_Generate:
             # 使用循环处理所有生成的图片
             for i, image_data in enumerate(self.r['images']):
                 image = Image.open(io.BytesIO(base64.b64decode(image_data)))
-                image.show()
                 #保存图片
                 save_path = f"{save_dir}_{i}.png"
                 image.save(save_path)
                 print(f"已保存图片到 {save_path}")
                 images.append(image)
+                save_paths.append(save_path)
             
             if not images:
                 raise ValueError("No images were saved")
             
-            # 默认返回第一张图片的索引，不再需要用户选择
+            # 默认返回第一张图片的索引
             selected_index = 0
             print(f"默认选择图片 {selected_index}，可在后续步骤中更改")
-            return selected_index
+            return selected_index, save_paths
             
         except Exception as e:
             print(f"保存图片时出错: {str(e)}")
-            return 0  # 出错时返回默认值
+            return 0, []  # 出错时返回默认值和空列表
 
-           
-if __name__ == "__main__":
-    sd=SD_Generate()
-    # 使用BREAK分隔的多区域提示词
-    prompt="""
-        best quality,masterpiece,(2 people, 1 boy:1.2, 1 girl:1.2) Medium Long Shot,busy street sidewalk,boy and girl holding hands,crossing street,crowd,vehicles,warm atmosphere,slow pan or side move,
-        BREAK
-        1girl,12 years old,asian,black hair,school uniform,
-        BREAK
-        teenager,black hair,blindfolded,determined,
+# FastAPI应用
+app = FastAPI(title="StableDiffusion API", description="使用StableDiffusion生成图像的API接口")
+
+@app.post("/generate", response_model=SDGenerateResponse)
+async def generate_image(request: SDGenerateRequest):
+    try:
+        sd = SD_Generate()
         
-        """
-    negative_prompt="NSFW,logo,text,blurry,bad proportions,cropped,watermark,signature,low quality,out of focus,bad anatomy,username,sketches,lowres,normal quality,grayscale,monochrome,worstquality,"
-    seed=-1
-    
-    # # 不使用区域提示器的示例
-    # sd.generate_prompt(prompt=prompt,negative_prompt=negative_prompt,seed=seed,batch_size=2)
-    # sd.get_img()
-    # sd.save_img("test/张三01")
-    
-    # 使用区域提示器的示例
-    sd.generate_prompt(
-        prompt=prompt,
-        negative_prompt=negative_prompt,
-        seed=seed,
-        batch_size=4,
-        use_regional_prompter=True,
-        regional_prompt_mode="Columns",
-        regional_prompt_ratios="1,1"
-    )
-    
-    sd.get_img()
-    index=sd.save_img("test/张三02")
-    seed=sd.seeds[index]
+        # 配置生成参数
+        sd.generate_prompt(
+            prompt=request.prompt,
+            negative_prompt=request.negative_prompt,
+            batch_size=request.batch_size,
+            seed=request.seed,
+            sampler_name=request.sampler_name,
+            use_regional_prompter=request.use_regional_prompter,
+            regional_prompt_mode=request.regional_prompt_mode,
+            regional_prompt_ratios=request.regional_prompt_ratios,
+            enable_hr=request.enable_hr,
+            model_name=request.model_name
+        )
+        
+        # 获取图像
+        sd.get_img()
+        
+        # 准备响应数据
+        response_data = {
+            "images": sd.r.get("images", []),
+            "seeds": sd.seeds,
+            "info": sd.info
+        }
+        
+        # 如果指定了保存目录，则保存图像
+        if request.save_dir:
+            _, save_paths = sd.save_img(request.save_dir)
+            response_data["save_paths"] = save_paths
+        
+        return response_data
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
-    # 使用高清修复
-    sd.generate_prompt(
-        prompt=prompt,
-        negative_prompt=negative_prompt,
-        seed=seed,
-        batch_size=1,
-        use_regional_prompter=True,
-        regional_prompt_mode="Columns",
-        regional_prompt_ratios="1,1",
-        enable_hr=True,
-    )
+if __name__ == "__main__":
 
-    sd.get_img()
-    seed=sd.save_img("test/张三03")
+    uvicorn.run("SD_Image:app", host="0.0.0.0", port=8000, reload=True) 
