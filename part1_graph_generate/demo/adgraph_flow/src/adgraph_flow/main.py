@@ -166,67 +166,6 @@ class GuideCreatorFlow(Flow[GuideCreatorState]):
         print("\nComplete guide compiled and saved to output/complete_guide.md")
         return "Guide creation completed successfully"
 
-    @listen(write_and_compile_guide)
-    def pic_write_and_compile_guide(self, outline):
-        """Write all sections and compile the guide"""
-        print("Writing guide sections and compiling...")
-        completed_sections = []
-
-        # Process sections one by one to maintain context flow
-        for section in outline.sections:
-            print(f"Processing section: {section.title}")
-
-            # Build context from previous sections
-            previous_sections_text = ""
-            if completed_sections:
-                previous_sections_text = "# Previously Written Sections\n\n"
-                for title in completed_sections:
-                    previous_sections_text += f"## {title}\n\n"
-                    previous_sections_text += (
-                        self.state.sections_content.get(title, "") + "\n\n"
-                    )
-            else:
-                previous_sections_text = "No previous sections written yet."
-
-            # Run the content crew for this section
-            result = (
-                PicContentCrew()
-                .crew()
-                .kickoff(
-                    inputs={
-                        "section_title": section.title,
-                        "section_description": section.description,
-                        "audience_level": self.state.audience_level,
-                        "previous_sections": previous_sections_text,
-                        "draft_content": "",
-                    }
-                )
-            )
-
-            # Store the content
-            self.state.sections_content[section.title] = result.raw
-            completed_sections.append(section.title)
-            print(f"Section completed: {section.title}")
-
-        # Compile the final guide
-        guide_content = f"# {outline.title}\n\n"
-        guide_content += f"## Introduction\n\n{outline.introduction}\n\n"
-
-        # Add each section in order
-        for section in outline.sections:
-            section_content = self.state.sections_content.get(section.title, "")
-            guide_content += f"\n\n{section_content}\n\n"
-
-        # Add conclusion
-        guide_content += f"## Conclusion\n\n{outline.conclusion}\n\n"
-
-        # Save the guide
-        with open("output/complete_guide.md", "w", encoding="utf-8") as f:
-            f.write(guide_content)
-
-        print("\nComplete guide compiled and saved to output/complete_guide.md")
-        return "Guide creation completed successfully"
-
 
 def kickoff():
     """Run the guide creator flow"""
