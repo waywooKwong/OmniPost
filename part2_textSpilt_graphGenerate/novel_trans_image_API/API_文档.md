@@ -8,6 +8,8 @@
     - [1.1 设置默认模型](#11-设置默认模型)
     - [1.2 设置备用模型](#12-设置备用模型)
     - [1.3 获取模型配置](#13-获取模型配置)
+    - [1.4 添加提供商模板](#14-添加提供商模板)
+    - [1.5 设置代理服务器](#15-设置代理服务器)
   - [2. 角色提取 API](#2-角色提取api)
     - [2.1 从文件提取角色](#21-从文件提取角色)
     - [2.2 从文本提取角色](#22-从文本提取角色)
@@ -20,6 +22,7 @@
 - [数据模型](#数据模型)
 - [错误处理](#错误处理)
 - [使用示例](#使用示例)
+- [配置文件结构](#配置文件结构)
 
 ## 概述
 
@@ -52,7 +55,7 @@
 
 **参数说明**:
 
-- `provider` (string, 必需): 模型供应商，如 "google", "zhipu" 等
+- `provider` (string, 必需): 模型供应商，如 "google", "zhipu", "deepseek" 等
 - `model_name` (string, 必需): 模型名称
 - `api_key` (string, 必需): API 密钥
 
@@ -73,7 +76,6 @@
 **状态码**:
 
 - `200`: 成功
-- `400`: 模型不在可用列表中
 - `500`: 服务器错误
 
 #### 1.2 设置备用模型
@@ -96,7 +98,7 @@
 
 **参数说明**:
 
-- `provider` (string, 必需): 模型供应商，如 "google", "zhipu" 等
+- `provider` (string, 必需): 模型供应商，如 "google", "zhipu", "deepseek" 等
 - `model_name` (string, 必需): 模型名称
 - `api_key` (string, 必需): API 密钥
 
@@ -117,7 +119,6 @@
 **状态码**:
 
 - `200`: 成功
-- `400`: 模型不在可用列表中
 - `500`: 服务器错误
 
 #### 1.3 获取模型配置
@@ -132,14 +133,96 @@
 
 ```json
 {
-  "default_model": "gemini-pro",
-  "backup_model": "glm-4",
-  "available_models": [
-    "gemini-pro",
-    "glm-4",
-    "claude-3-haiku",
-    "claude-3-sonnet"
-  ]
+  "default_model": "gemini-2.5-flash-preview-04-17",
+  "backup_model": "glm-4-flash",
+  "provider_templates": {
+    "google": {
+      "api_param": "google_api_key",
+      "env_var": "GOOGLE_API_KEY",
+      "temperature": 0.7
+    },
+    "zhipu": {
+      "api_param": "api_key",
+      "env_var": "ZHIPUAI_API_KEY",
+      "temperature": 0.7
+    },
+    "deepseek": {
+      "api_param": "deepseek_api_key",
+      "env_var": "DEEPSEEK_API_KEY",
+      "temperature": 0.7
+    }
+  },
+  "providers": {
+    "google": {
+      "models": [
+        "gemini-2.0-flash",
+        "gemini-2.5-flash-preview-04-17",
+        "gemini-2.5-pro-exp-03-25"
+      ]
+    },
+    "zhipu": {
+      "models": ["glm-4-flash"]
+    },
+    "deepseek": {
+      "models": ["deepseek-chat"]
+    }
+  }
+}
+```
+
+**状态码**:
+
+- `200`: 成功
+- `500`: 服务器错误
+
+#### 1.4 添加提供商模板
+
+**路径**: `/add_provider_template`
+
+**方法**: `POST`
+
+**描述**: 添加或更新一个提供商的模板配置
+
+**请求参数**:
+
+- `provider_name` (string, 必需): 提供商名称，如 "openai"
+- `api_param` (string, 必需): API 参数名称，如 "openai_api_key"
+- `env_var` (string, 必需): 环境变量名称，如 "OPENAI_API_KEY"
+- `temperature` (float, 可选): 温度参数，默认为 0.7
+
+**响应**:
+
+```json
+{
+  "success": true,
+  "message": "提供商模板 openai 已添加/更新"
+}
+```
+
+**状态码**:
+
+- `200`: 成功
+- `500`: 服务器错误
+
+#### 1.5 设置代理服务器
+
+**路径**: `/set_proxy`
+
+**方法**: `POST`
+
+**描述**: 设置系统使用的 HTTP/HTTPS 代理服务器
+
+**请求参数**:
+
+- `http_proxy` (string, 必需): HTTP 代理服务器地址，如 "http://127.0.0.1:7890"
+- `https_proxy` (string, 可选): HTTPS 代理服务器地址，如不提供则使用 HTTP 代理地址
+
+**响应**:
+
+```json
+{
+  "success": true,
+  "message": "代理设置已更新"
 }
 ```
 
@@ -494,104 +577,69 @@
 - `404`: 资源不存在
 - `500`: 服务器内部错误
 
-## 使用示例
+## 配置文件结构
 
-### JavaScript (Fetch API)
+系统使用 YAML 格式的配置文件来管理模型和提供商。配置文件结构如下：
 
-```javascript
-// 从文本提取角色示例
-async function extractRolesFromText() {
-  const response = await fetch("http://localhost:8000/role-extract-text", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      content: "这是小说文本内容...",
-      project_id: "project123",
-      use_backup_model: false,
-    }),
-  });
+```yaml
+api_keys:
+  google: "your_google_api_key"
+  zhipu: "your_zhipu_api_key"
+  deepseek: "your_deepseek_api_key"
 
-  const data = await response.json();
-  console.log(data);
-}
+backup_model: glm-4-flash
+default_model: gemini-2.5-flash-preview-04-17
 
-// 生成场景提示词示例
-async function generateScenePrompt() {
-  const response = await fetch("http://localhost:8000/generate-scene-prompt", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      project_id: "project123",
-      description: "教室内，阳光透过窗户照射进来...",
-      original_text: "小明坐在窗边，阳光透过玻璃窗照在他的课本上...",
-      use_backup_model: false,
-    }),
-  });
+# 代理设置
+proxy:
+  http: http://127.0.0.1:7890
+  https: http://127.0.0.1:7890
 
-  const data = await response.json();
-  console.log(data);
-}
+# 厂家模板配置，定义每个厂家的通用参数
+provider_templates:
+  google:
+    api_param: google_api_key
+    env_var: GOOGLE_API_KEY
+    temperature: 0.7
+  zhipu:
+    api_param: api_key
+    env_var: ZHIPUAI_API_KEY
+    temperature: 0.7
+  deepseek:
+    api_param: deepseek_api_key
+    env_var: DEEPSEEK_API_KEY
+    temperature: 0.7
 
-// 生成图像示例
-async function generateImage() {
-  const response = await fetch("http://localhost:8000/sd-generate", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      prompt: "(2 people:1.3), classroom, sunlight through window...",
-      negative_prompt: "ugly, deformed, blurry, low quality",
-      batch_size: 1,
-      enable_hr: true,
-      save_dir: "output/project123/scene1",
-    }),
-  });
-
-  const data = await response.json();
-  console.log(data);
-}
+# 每个厂家支持的模型列表
+providers:
+  google:
+    models:
+      - gemini-2.0-flash
+      - gemini-2.5-flash-preview-04-17
+  zhipu:
+    models:
+      - glm-4-flash
+  deepseek:
+    models:
+      - deepseek-chat
 ```
 
-### Python (requests)
+### 添加新模型或厂家的步骤
 
-```python
-import requests
-import json
+1. **添加新厂家**：
 
-# 从文件提取角色示例
-def extract_roles_from_file():
-    url = "http://localhost:8000/role-extract"
-    files = {'file': open('novel.txt', 'rb')}
-    data = {
-        'project_id': 'project123',
-        'use_backup_model': 'false'
-    }
+   - 使用 `/add_provider_template` API 添加新的提供商模板
+   - 或直接在配置文件的 `provider_templates` 部分添加新的提供商配置
 
-    response = requests.post(url, files=files, data=data)
-    print(response.json())
+2. **添加新模型**：
 
-# 生成场景分镜示例
-def generate_scenes():
-    url = "http://localhost:8000/generate-scenes"
-    payload = {
-        "project_id": "project123",
-        "role_info": {
-            "001": {
-                "name": "小明",
-                "prompt": "a boy, young, student, short black hair"
-            },
-            "002": {
-                "name": "小红",
-                "prompt": "a girl, teenage, student, long brown hair (curly:1.2)"
-            }
-        }
-    }
+   - 使用 `/set_default_model` 或 `/set_backup_model` API 添加新模型，系统会自动将模型添加到对应提供商的模型列表中
+   - 或直接在配置文件的 `providers.[provider_name].models` 列表中添加该模型
 
-    response = requests.post(url, json=payload)
-    print(response.json())
-```
+3. **使用新模型**：
+
+   - 设置 `default_model` 或 `backup_model` 为新添加的模型名称
+
+4. **设置代理**：
+   - 使用 `/set_proxy` API 设置代理服务器
+   - 或直接在配置文件的 `proxy` 部分修改代理设置

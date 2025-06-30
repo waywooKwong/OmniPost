@@ -15,17 +15,12 @@ os_setenv()
 
 """
 class RoleExtractor:
-    def __init__(self, novel_path: str):
+    def __init__(self, novel_path: str,novel_dir: str):
         # 文件验证与读取
         if not os.path.exists(novel_path):
             raise FileNotFoundError(f"小说文件不存在: {novel_path}")
         
-        # 获取小说名称
-        self.novel_name = os.path.splitext(os.path.basename(novel_path))[0]
-        
-        # 创建小说专属目录
-        self.novel_dir = os.path.join("part2_textSpilt_graphGenerate", self.novel_name)
-        os.makedirs(self.novel_dir, exist_ok=True)
+        self.novel_dir = novel_dir
         
         # 创建角色信息目录
         self.role_message_dir = os.path.join(self.novel_dir, "role_message")

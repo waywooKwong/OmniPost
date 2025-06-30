@@ -24,7 +24,7 @@ def os_setenv():
     # 设置Google API密钥
     # os.environ["GOOGLE_API_KEY"] = "AIzaSyC93MxOUrGCH-VOMTM5JVW6tRvgGQy1XcE"
     # os.environ["GOOGLE_API_KEY"] = "AIzaSyArPTBPliX86XJeE5p5xHB9BbSFE__saBw"
-    os.environ["GOOGLE_API_KEY"] = "AIzaSyBulXOPSyuOUidcz9GUI52jtr7m7fxCLJ0"
+    os.environ["GOOGLE_API_KEY"] = "AIzaSyAPpRdWtEVrKVXKLORGO5moKnsfb4jWoM4"
     # os.environ["GOOGLE_API_KEY"] = "AIzaSyAE3FuOPwdKEhYs0GlNBkCZvEczSTvJkjI"
 
     
@@ -48,20 +48,20 @@ def get_gemini_2_5_flash():
     # 初始化ChatGoogleGenerativeAI
     llm = ChatGoogleGenerativeAI(
         # model="gemini-2.0-flash",
-        model="gemini-2.5-pro-exp-03-25",
+        model="gemini-2.5-flash-preview-04-17",
         temperature=0.7
     )
     return llm
 
-#gemini绘图：
-def get_gemini_photo(contents):
-    client = genai.Client(api_key="AIzaSyC93MxOUrGCH-VOMTM5JVW6tRvgGQy1XcE")
+# #gemini绘图：
+# def get_gemini_photo(contents):
+#     client = genai.Client(api_key="AIzaSyC93MxOUrGCH-VOMTM5JVW6tRvgGQy1XcE")
 
-    img_response = client.models.generate_content(
-                model="gemini-2.0-flash-exp-image-generation",
-                contents=contents,
-                config=types.GenerateContentConfig(
-                    response_modalities=['Text', 'Image']
-                )
-            )
-    return img_response
+#     img_response = client.models.generate_content(
+#                 model="gemini-2.0-flash-exp-image-generation",
+#                 contents=contents,
+#                 config=types.GenerateContentConfig(
+#                     response_modalities=['Text', 'Image']
+#                 )
+#             )
+#     return img_response

@@ -2,6 +2,8 @@ import os
 import json
 import time
 import re
+import requests
+import requests.exceptions
 from typing import List, Dict, Optional, Any
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -9,7 +11,7 @@ from pydantic import BaseModel
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from dotenv import load_dotenv
-from LLM_Choose import get_default_llm, init_environment
+from LLM_Choose import get_default_llm, get_backup_llm, init_environment
 
 
 # 加载环境变量
@@ -92,7 +94,7 @@ class NovelSceneGenerator:
             - 确保描述的连贯性，保持文本的自然顺序，不漏掉任何关键信息。
             - 使用简洁而精确的中文语言，避免添加原文中没有的内容。
             - 禁止生成任何含有文字的画面描述
-            - 禁止生成任何人物的对话，只生成人物的站位、动作、表情即可。
+            - 禁止在description中生成任何人物的对话，只生成人物的站位、动作、表情即可。
             - 尽可能一句话对应一个分镜头
             - 处理每个分镜头的人物角色信息，将出现的角色提取出来并写出每个角色在当前场景下的动作，手中的物品等英文词组
             - 注意，生成角色提示词的时候禁止生成人物性别，外貌等基本信息，这些信息我在之前步骤已经得到了，不需要重复生成，只需要人物最新的穿着打扮，动作即可，不超过5个英语单词！！！
@@ -120,6 +122,8 @@ class NovelSceneGenerator:
             额外要求：
             - 每个场景描述要简明扼要，但同时确保所有重要细节不遗漏。
             - 如果遇到多个分镜，可以将每个分镜描述作为一个独立的JSON对象放入"scenes"列表中。
+            - 第一个场景要额外细致的打磨，确保足够吸引人
+            - 不要遗漏任何原文信息，包括原文的对话，不要遗漏任何对话
             """),
             ("human", "文本内容：\n{text_segment}\n\n请将此文本切分为多个场景分镜头，并严格按照要求描述每个场景。")
         ])
@@ -133,12 +137,34 @@ class NovelSceneGenerator:
         print("开始处理小说文本...")
         start_time = time.time()
         
+        # 限制文本长度，避免超出模型上下文窗口
+        max_text_length = 15000  # 设置一个合理的最大文本长度
+        if len(self.novel_text) > max_text_length:
+            print(f"小说文本过长({len(self.novel_text)}字符)，截取前{max_text_length}字符进行处理")
+            text_to_process = self.novel_text[:max_text_length]
+        else:
+            text_to_process = self.novel_text
+        
         for attempt in range(retries):
             try:
                 print(f"第{attempt+1}次尝试处理小说...")
                 # 使用LLM但不使用Parser
                 chain = self.create_scene_prompt() | self.llm 
-                response = chain.invoke({"text_segment": self.novel_text})
+                
+                # 添加超时控制
+                try:
+                    # 尝试使用默认模型
+                    response = chain.invoke({"text_segment": text_to_process}, timeout=120)
+                except (requests.exceptions.ConnectionError, requests.exceptions.Timeout) as e:
+                    print(f"连接错误或超时: {str(e)}")
+                    # 如果是最后一次尝试，尝试使用备用模型
+                    if attempt == retries - 1:
+                        print("尝试使用备用模型...")
+                        backup_llm = get_backup_llm()
+                        backup_chain = self.create_scene_prompt() | backup_llm
+                        response = backup_chain.invoke({"text_segment": text_to_process}, timeout=120)
+                    else:
+                        raise
                 
                 # 获取AIMessage的内容
                 if hasattr(response, "content"):
@@ -146,8 +172,6 @@ class NovelSceneGenerator:
                 else:
                     # 如果不是AIMessage对象
                     response_text = str(response)
-                    
-                
                 
                 # 处理可能包含在Markdown代码块中的JSON
                 json_pattern = r'```(?:json)?\s*([\s\S]*?)```'
@@ -183,7 +207,10 @@ class NovelSceneGenerator:
                     return self.scenes
                 except json.JSONDecodeError as e:
                     print(f"JSON解析错误: {e}")
-                    raise
+                    if attempt == retries - 1:
+                        raise
+                    else:
+                        print("尝试重新解析...")
             
             except Exception as e:
                 print(f"第{attempt+1}次尝试失败: {str(e)}")
@@ -200,7 +227,7 @@ class NovelSceneGenerator:
                     with open(error_path, 'w', encoding='utf-8') as f:
                         f.write(f"场景提取失败: {str(e)}")
                     return self.scenes
-                time.sleep(2)
+                time.sleep(5)  # 增加重试间隔时间
     
     def save_scenes_to_json(self) -> str:
         """保存场景到JSON文件"""
@@ -231,6 +258,9 @@ async def generate_scenes(request: SceneGenerateRequest):
     - **project_id**: 项目ID
     - **role_info**: 角色信息JSON对象
     """
+    # 初始化环境
+    init_environment()
+    
     try:
         # 初始化场景生成器
         generator = NovelSceneGenerator(

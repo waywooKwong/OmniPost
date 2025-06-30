@@ -17,16 +17,12 @@ os_setenv()
 用于将小说文本拆分为多个场景，并保存到JSON文件中。
 """
 class NovelSceneGenerator:
-    def __init__(self, novel_path: str):
+    def __init__(self, novel_path: str,novel_dir: str):
         # 文件验证与读取
         if not os.path.exists(novel_path):
             raise FileNotFoundError(f"小说文件不存在: {novel_path}")
         
-          # 获取小说名称
-        self.novel_name = os.path.splitext(os.path.basename(novel_path))[0]
-        
-        # 创建小说专属目录
-        self.novel_dir = os.path.join("part2_textSpilt_graphGenerate", self.novel_name)
+        self.novel_dir = novel_dir
 
         self.novel_path = novel_path
         
@@ -39,9 +35,7 @@ class NovelSceneGenerator:
         # 初始化文本模型
         self.llm = get_gemini_2_5_flash()
         
-        # 创建存储目录
-        self.output_dir = os.path.join(self.novel_dir, "role_message")
-        
+      
         # 加载角色信息
         self.role_names = self.load_role_names()
         
@@ -51,7 +45,7 @@ class NovelSceneGenerator:
     def load_role_names(self) -> List[str]:
         """从role_info.json加载角色名称列表"""
         role_info_path = os.path.join(self.novel_dir, "role_message", "role_info.json")
-        
+        self.output_dir = os.path.join(self.novel_dir, "role_message")
         if not os.path.exists(role_info_path):
             print(f"角色信息文件不存在: {role_info_path}，将使用空角色列表")
             return []
@@ -144,6 +138,9 @@ class NovelSceneGenerator:
                 print(f"处理完成！共生成 {len(self.scenes)} 个场景")
                 print(f"总耗时: {end_time - start_time:.2f} 秒")
                 
+                # 保存场景到JSON文件
+                self.save_scenes_to_json()
+                
                 return self.scenes
             
             except Exception as e:
@@ -152,10 +149,12 @@ class NovelSceneGenerator:
                     raise RuntimeError(f"场景提取失败：{str(e)}")
                 time.sleep(2)
     
-    def save_scenes_to_json(self, output_path: str = None):
+    def save_scenes_to_json(self):
         """保存场景到JSON文件"""
-        if output_path is None:
-            output_path = os.path.join(self.output_dir, "novel_scenes.json")
+        # 确保输出目录存在
+        os.makedirs(self.output_dir, exist_ok=True)
+        
+        output_path = os.path.join(self.output_dir, "novel_scenes.json")
         
         result = {
             "metadata": {
@@ -179,4 +178,4 @@ if __name__ == "__main__":
         novel_path="part2_textSpilt_graphGenerate/files/斗破苍穹节选.txt"  # 替换为实际路径
     )
     scenes = generator.process_novel()
-    generator.save_scenes_to_json()
+    
