@@ -20,6 +20,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "aigc-AdGraph-front"
+rootProject.name = "OmniPost"
 include(":app")
  

@@ -43,6 +43,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -60,6 +61,7 @@ import kotlin.math.sign
 @Composable
 fun PreviewScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
     var showDeployDialog by remember { mutableStateOf(false) }
+    var isPublishingSuccessful by remember { mutableStateOf(false) }
     
     // 获取屏幕宽度以计算卡片位置
     val configuration = LocalConfiguration.current
@@ -445,6 +447,7 @@ fun PreviewScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
                     onClick = {
                         // TODO: 实现部署逻辑
                         showDeployDialog = false
+                        isPublishingSuccessful = true
                     }
                 ) {
                     Text(
@@ -514,4 +517,41 @@ fun PreviewScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
         // 打印日志帮助调试
         println("初始化预览界面，卡片数量: $cardCount")
     }
+
+    if (isPublishingSuccessful) {
+        SuccessDialog(onDismiss = { isPublishingSuccessful = false })
+    }
+}
+
+@Composable
+private fun SuccessDialog(
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        shape = DialogShape,
+        title = { 
+            Text(
+                "发布成功",
+                style = MaterialTheme.typography.titleLarge
+            ) 
+        },
+        text = {
+            Text(
+                text = "您的文档已成功发布！",
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Center
+            )
+        },
+        confirmButton = {
+            TextButton(
+                onClick = onDismiss,
+                colors = ButtonDefaults.textButtonColors(
+                    contentColor = MaterialTheme.colorScheme.primary
+                )
+            ) {
+                Text("确定")
+            }
+        }
+    )
 }

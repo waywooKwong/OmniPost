@@ -89,7 +89,7 @@ private fun WelcomeSection(
         
         // 欢迎标题
         Text(
-            text = "欢迎使用aigc-AdGraph",
+            text = "欢迎使用OmniPost",
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onBackground
@@ -180,6 +180,7 @@ private fun ProcessingSection(
     var isPaused by remember { mutableStateOf(false) }
     var showPreview by remember { mutableStateOf(false) }
     var selectedParagraphIndex by remember { mutableStateOf(-1) }
+    var isPublishingSuccessful by remember { mutableStateOf(false) }
     
     // 添加自动轮换效果，仅在非暂停状态下活动
     LaunchedEffect(isPaused) {
@@ -302,6 +303,11 @@ private fun ProcessingSection(
                         onDismiss = { showPreview = false }
                     )
                 }
+            }
+            
+            // 发布成功对话框
+            if (isPublishingSuccessful) {
+                SuccessDialog(onDismiss = { isPublishingSuccessful = false })
             }
         }
     }
@@ -614,6 +620,39 @@ private fun ImagePreviewDialog(
                 )
             ) {
                 Text("关闭")
+            }
+        }
+    )
+}
+
+@Composable
+private fun SuccessDialog(
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        shape = DialogShape,
+        title = { 
+            Text(
+                "发布成功",
+                style = MaterialTheme.typography.titleLarge
+            ) 
+        },
+        text = {
+            Text(
+                text = "您的文档已成功发布！",
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Center
+            )
+        },
+        confirmButton = {
+            TextButton(
+                onClick = onDismiss,
+                colors = ButtonDefaults.textButtonColors(
+                    contentColor = MaterialTheme.colorScheme.primary
+                )
+            ) {
+                Text("确定")
             }
         }
     )
