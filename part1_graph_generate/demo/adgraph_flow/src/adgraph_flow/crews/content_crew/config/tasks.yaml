@@ -1,7 +1,7 @@
 # src/guide_creator_flow/crews/content_crew/config/tasks.yaml
 write_section_task:
   description: >
-    Write a comprehensive section on the topic: "{section_title}"
+    Write a Social Media Post on the topic: "{section_title}"
 
     Section description: {section_description}
     Target audience: {audience_level} level learners
