@@ -14,26 +14,18 @@ load_dotenv()
 用于生成场景图片，并保存到本地。
 """
 class SceneImageGenerator:
-    def __init__(self, novel_name: str):
+    def __init__(self, input_dir: str,output_dir: str,novel_name: str):
         """
         初始化场景图片生成器
         
         Args:
             novel_name (str): 小说名称
         """
-        # 设置相关目录路径
+       
+        
+        self.input_dir = input_dir
+        self.output_dir = output_dir
         self.novel_name = novel_name
-        self.novel_dir = os.path.join("part2_textSpilt_graphGenerate", self.novel_name)
-        self.role_message_dir = os.path.join(self.novel_dir, "role_message")
-        self.output_dir = os.path.join(self.novel_dir, "scene_images")
-        
-        # 设置文件路径
-        self.character_archive_file = os.path.join(self.role_message_dir, "character_archive.json")
-        self.scene_prompts_file = os.path.join(self.role_message_dir, "scene_prompts.json")
-        self.novel_scenes_file = os.path.join(self.role_message_dir, "novel_scenes.json")
-        self.role_info_file = os.path.join(self.role_message_dir, "role_info.json")
-        self.scene_archive_file = os.path.join(self.role_message_dir, "scene_archive.json")
-        
         # 确保输出目录存在
         self.ensure_dir_exists(self.output_dir)
         
@@ -41,12 +33,12 @@ class SceneImageGenerator:
         self.sd_generator = SD_Generate()
         
         # 加载所需文件
-        self.character_archive = {}
-        self.scene_prompts = {}
-        self.novel_scenes = {}
-        self.role_info = {}
+        self.scene_archive_file = os.path.join(self.output_dir, "scene_archive.json")
+        self.scene_prompts = self.load_json_file(os.path.join(self.input_dir, "role_message", "novel_scenes_prompt.json"))
+        self.novel_scenes = self.load_json_file(os.path.join(self.input_dir, "role_message", "novel_scenes.json"))
+        self.role_info = self.load_json_file(os.path.join(self.input_dir, "role_message", "role_info.json"))
+       
         self.scene_results = {}
-        self.scene_archive = {}
         
         # 通用提示词
         self.positive_prompt = GENERAL_PROMPTS["positive_prompt"]
@@ -268,11 +260,7 @@ class SceneImageGenerator:
         Returns:
             Dict: 所有场景的生成结果
         """
-        # 加载所需数据
-        self.character_archive = self.load_json_file(self.character_archive_file)
-        self.scene_prompts = self.load_json_file(self.scene_prompts_file)
-        self.novel_scenes = self.load_json_file(self.novel_scenes_file)
-        self.role_info = self.load_json_file(self.role_info_file)
+        
         
         # 检查数据是否加载成功
         scene_prompts_data = self.scene_prompts.get('scene_prompts', [])

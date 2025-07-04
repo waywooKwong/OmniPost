@@ -57,3 +57,12 @@ coverage.xml
 
 # Logs
 *.log
+
+#projects
+part2_textSpilt_graphGenerate/Projects/
+
+#output
+output/
+
+#result
+result/

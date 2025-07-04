@@ -13,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import com.liqun.aigc_adgraph_front.model.NovelData
 import com.liqun.aigc_adgraph_front.ui.screens.MainScreen
 import com.liqun.aigc_adgraph_front.ui.screens.PreviewScreen
 import com.liqun.aigc_adgraph_front.ui.theme.AigcAdGraphFrontTheme
@@ -23,6 +24,14 @@ class MainActivity : ComponentActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // 加载资源数据
+        try {
+            NovelData.loadData(this)
+            Log.d("MainActivity", "加载资源数据成功，段落数: ${NovelData.paragraphs.size}")
+        } catch (e: Exception) {
+            Log.e("MainActivity", "加载资源数据失败", e)
+        }
         
         // 注册返回键处理
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {

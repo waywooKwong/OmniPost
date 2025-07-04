@@ -32,7 +32,7 @@ fun MainScreen(
             TopAppBar(
                 title = { 
                     Text(
-                        "aigc-AdGraph",
+                        "OmniPost",
                         style = MaterialTheme.typography.titleLarge,
                         color = MaterialTheme.colorScheme.primary
                     ) 
@@ -105,7 +105,7 @@ fun WelcomeSection(
     ) {
         // 欢迎标题
         Text(
-            text = "欢迎使用aigc-AdGraph",
+            text = "欢迎使用OmniPost",
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onBackground

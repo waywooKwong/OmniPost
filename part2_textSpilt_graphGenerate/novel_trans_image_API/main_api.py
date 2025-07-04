@@ -47,14 +47,25 @@ async def set_default_model(request: ModelChangeRequest):
     """设置默认模型"""
     config = load_config()
     
-    # 检查提供的模型是否在可用模型列表中
-    if request.model_name not in config.get("available_models", []):
-        raise HTTPException(status_code=400, detail=f"模型 {request.model_name} 不在可用模型列表中")
-    
     # 更新API密钥
     if "api_keys" not in config:
         config["api_keys"] = {}
     config["api_keys"][request.provider] = request.api_key
+    
+    # 确保providers中有该模型
+    if "providers" not in config:
+        config["providers"] = {}
+    
+    if request.provider not in config["providers"]:
+        # 如果供应商不存在，添加供应商配置
+        config["providers"][request.provider] = {"models": []}
+    
+    # 确保providers.models列表中有该模型
+    if "models" not in config["providers"][request.provider]:
+        config["providers"][request.provider]["models"] = []
+        
+    if request.model_name not in config["providers"][request.provider]["models"]:
+        config["providers"][request.provider]["models"].append(request.model_name)
     
     # 更新默认模型
     config["default_model"] = request.model_name
@@ -76,14 +87,25 @@ async def set_backup_model(request: ModelChangeRequest):
     """设置备用模型"""
     config = load_config()
     
-    # 检查提供的模型是否在可用模型列表中
-    if request.model_name not in config.get("available_models", []):
-        raise HTTPException(status_code=400, detail=f"模型 {request.model_name} 不在可用模型列表中")
-    
     # 更新API密钥
     if "api_keys" not in config:
         config["api_keys"] = {}
     config["api_keys"][request.provider] = request.api_key
+    
+    # 确保providers中有该模型
+    if "providers" not in config:
+        config["providers"] = {}
+    
+    if request.provider not in config["providers"]:
+        # 如果供应商不存在，添加供应商配置
+        config["providers"][request.provider] = {"models": []}
+    
+    # 确保providers.models列表中有该模型
+    if "models" not in config["providers"][request.provider]:
+        config["providers"][request.provider]["models"] = []
+        
+    if request.model_name not in config["providers"][request.provider]["models"]:
+        config["providers"][request.provider]["models"].append(request.model_name)
     
     # 更新备用模型
     config["backup_model"] = request.model_name
@@ -108,7 +130,8 @@ async def get_model_config():
     return {
         "default_model": config.get("default_model"),
         "backup_model": config.get("backup_model"),
-        "available_models": config.get("available_models", [])
+        "providers": config.get("providers", {}),
+        "provider_templates": config.get("provider_templates", {})
     }
 
 # ===== 角色提取API =====
@@ -372,6 +395,6 @@ async def generate_image(request: SDGenerateRequest):
 # 启动服务
 if __name__ == "__main__":
     print("启动所有API服务...")
-    print("访问 http://localhost:8000/docs 查看API文档")
+    print("访问 http://localhost:8090/docs 查看API文档")
     # 启动FastAPI服务
     uvicorn.run("main_api:app", host="0.0.0.0", port=8090, reload=True) 
