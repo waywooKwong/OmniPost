@@ -1,5 +1,6 @@
 package com.liqun.aigc_adgraph_front.ui.screens
 
+import android.util.Log
 import androidx.compose.animation.core.*
 import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -19,6 +20,7 @@ import androidx.compose.foundation.pager.PagerDefaults
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.Share
@@ -37,7 +39,9 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntOffset
@@ -76,6 +80,15 @@ fun PreviewScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
     // 卡片间距
     val cardSpacing = 320f
     val cardCount = NovelData.paragraphs.size
+    
+    // 获取Context，用于资源访问
+    val context = LocalContext.current
+    
+    // 获取段落对应的图片资源ID
+    fun getDrawableResourceId(index: Int): Int {
+        val resourceName = NovelData.getParagraphImageName(index)
+        return context.resources.getIdentifier(resourceName, "drawable", context.packageName)
+    }
     
     // 共享滑动状态 - 允许在任何区域滑动
     val scrollableState = rememberScrollableState { delta ->
@@ -334,11 +347,25 @@ fun PreviewScreen(modifier: Modifier = Modifier, onBack: () -> Unit) {
                                         ),
                                     contentAlignment = Alignment.Center
                                 ) {
-                                    Text(
-                                        text = "图片 ${i + 1}",
-                                        style = MaterialTheme.typography.headlineMedium,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
+                                    // 获取图片资源ID
+                                    val drawableId = getDrawableResourceId(i)
+                                    
+                                    if (drawableId != 0) {
+                                        // 如果找到资源，显示图片
+                                        Image(
+                                            painter = painterResource(id = drawableId),
+                                            contentDescription = NovelData.getParagraphImageDescription(i),
+                                            modifier = Modifier.fillMaxSize(),
+                                            contentScale = ContentScale.Crop
+                                        )
+                                    } else {
+                                        // 如果未找到资源，显示默认内容
+                                        Text(
+                                            text = "图片 ${i + 1} (尚未生成)",
+                                            style = MaterialTheme.typography.headlineMedium,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
                                 }
                                 
                                 // 文本区域

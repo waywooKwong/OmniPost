@@ -5,6 +5,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.*
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -30,9 +31,13 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.liqun.aigc_adgraph_front.R
 import com.liqun.aigc_adgraph_front.model.NovelData
 import com.liqun.aigc_adgraph_front.ui.theme.*
 import kotlinx.coroutines.delay
@@ -387,6 +392,13 @@ private fun ActiveParagraphPreview(
     index: Int,
     modifier: Modifier = Modifier
 ) {
+    // 获取Context，用于资源访问
+    val context = LocalContext.current
+    
+    // 获取段落对应的图片资源ID
+    val resourceName = NovelData.getParagraphImageName(index)
+    val drawableId = context.resources.getIdentifier(resourceName, "drawable", context.packageName)
+    
     Card(
         modifier = modifier
             .shadow(
@@ -399,35 +411,66 @@ private fun ActiveParagraphPreview(
         )
     ) {
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(
-                            CardGradientStart,
-                            CardGradientEnd
-                        )
-                    )
-                ),
+            modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                CircularProgressIndicator(
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(48.dp)
+            if (drawableId != 0) {
+                // 如果找到资源，显示图片
+                Image(
+                    painter = painterResource(id = drawableId),
+                    contentDescription = NovelData.getParagraphImageDescription(index),
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
                 )
                 
-                Spacer(modifier = Modifier.height(16.dp))
-                
-                Text(
-                    text = "正在为第 ${index + 1} 段生成配图...",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center
-                )
+                // 添加一个半透明覆盖层和文字，增强可读性
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.Black.copy(alpha = 0.3f)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "第 ${index + 1} 段配图生成中",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = Color.White,
+                        textAlign = TextAlign.Center
+                    )
+                }
+            } else {
+                // 如果未找到资源，显示进度指示器
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(
+                                    CardGradientStart,
+                                    CardGradientEnd
+                                )
+                            )
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        CircularProgressIndicator(
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(48.dp)
+                        )
+                        
+                        Spacer(modifier = Modifier.height(16.dp))
+                        
+                        Text(
+                            text = "正在为第 ${index + 1} 段生成配图...",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
             }
         }
     }
@@ -498,6 +541,13 @@ private fun ImagePreviewDialog(
     paragraphIndex: Int,
     onDismiss: () -> Unit
 ) {
+    // 获取Context，用于资源访问
+    val context = LocalContext.current
+    
+    // 获取段落对应的图片资源ID
+    val resourceName = NovelData.getParagraphImageName(paragraphIndex)
+    val drawableId = context.resources.getIdentifier(resourceName, "drawable", context.packageName)
+    
     AlertDialog(
         onDismissRequest = onDismiss,
         shape = DialogShape,
@@ -514,22 +564,47 @@ private fun ImagePreviewDialog(
                     .fillMaxWidth()
                     .height(300.dp)
                     .clip(RoundedCornerShape(12.dp))
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                CardGradientStart,
-                                CardGradientEnd
-                            )
-                        )
-                    ),
-                contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = "此处将显示生成的配图",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+                if (drawableId != 0) {
+                    // 如果找到资源，显示图片
+                    Image(
+                        painter = painterResource(id = drawableId),
+                        contentDescription = NovelData.getParagraphImageDescription(paragraphIndex),
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
+                    )
+                } else {
+                    // 如果未找到资源，显示占位符
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(
+                                brush = Brush.verticalGradient(
+                                    colors = listOf(
+                                        CardGradientStart,
+                                        CardGradientEnd
+                                    )
+                                )
+                            ),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "此处将显示生成的配图",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
             }
+            
+            // 添加图片描述
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = NovelData.getParagraphImageDescription(paragraphIndex),
+                style = MaterialTheme.typography.bodyMedium,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
         },
         confirmButton = {
             TextButton(
