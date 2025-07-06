@@ -3,9 +3,13 @@
 OmniPost 是一款跨平台流媒体内容智能迁移工作站，极大提升内容创作者与团队的流媒体平台运营效率。
 
 <!-- 使用 HTML 标签插入图片并控制大小 -->
+
 <!-- 方法1：使用 width 和 height 属性 -->
+
 <!-- <img src="src/readme/logo.png" width="300" height="200" alt="OmniPost 界面截图"> -->
+
 <!-- 方法4：响应式图片，在不同屏幕尺寸下自适应 -->
+
 <img src="src/readme/logo.jpg" width="200" height="200" alt="OmniPost 响应式展示">
 
 从一个创作思路出发，自动化内容图文增强，面向平台进行风格适配与发布。将原始创作思路（如视频、短文、配图等）进行
@@ -122,12 +126,12 @@ python main.py
 
 ```powershell
 cd part2_textSpilt_graphGenerate\novel_trans_image_API
-python Scene_Excrat.py
+python main_api.py
 # 或
-uvicorn Scene_Excrat:app --host 0.0.0.0 --port 8000 --reload
+uvicorn main_api:app --host 0.0.0.0 --port 8090 --reload
 ```
 
-**API 文档**: 访问 `http://localhost:8000/docs`
+**API 文档**: 访问 `http://localhost:8090/docs`
 
 **主要功能**:
 
