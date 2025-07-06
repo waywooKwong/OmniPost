@@ -6,7 +6,7 @@ OmniPost 是一款跨平台流媒体内容智能迁移工作站，极大提升�
 <!-- 方法1：使用 width 和 height 属性 -->
 <!-- <img src="src/readme/logo.png" width="300" height="200" alt="OmniPost 界面截图"> -->
 <!-- 方法4：响应式图片，在不同屏幕尺寸下自适应 -->
-<img src="src/readme/logo.jpg" style="max-width: 10%; height: auto; display: block; margin: 0 auto;" alt="OmniPost 响应式展示">
+<img src="src/readme/logo.jpg" width="200" height="200" alt="OmniPost 响应式展示">
 
 从一个创作思路出发，自动化内容图文增强，面向平台进行风格适配与发布。将原始创作思路（如视频、短文、配图等）进行
 - 基于平台风格的高定制度适配和优化、
